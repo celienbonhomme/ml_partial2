@@ -6,6 +6,7 @@ from tqdm import tqdm
 import itertools
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, mean_absolute_percentage_error, mean_squared_error, r2_score
+from time import time
 
 
 def grid_search_by_hand(model, param_grid, X_train, y_train, cv, scoring):
@@ -54,14 +55,18 @@ def VIF_calculation(X):
 def delete_multicollinearity(df, target_name, VIF_threshold):
     """Delete multicollinearity from the dataset"""
     X = df.drop(target_name, axis=1)
+    start = time()
     VIF_mat = VIF_calculation(X)
+    end = time()
     n_VIF = VIF_mat["VIF"][0]
     if (n_VIF <= VIF_threshold):
         print("There is no multicollinearity!")
     else:
         while (n_VIF > VIF_threshold):
-            print(f'Dropped column {VIF_mat["variable"][0]} with VIF: {VIF_mat["VIF"][0]}')
+            print(f'Dropped column {VIF_mat["variable"][0]} with VIF: {round(VIF_mat["VIF"][0], 1)} ({int(end - start)}s)')
             X = X.drop(VIF_mat["variable"][0], axis=1)
+            start = time()
             VIF_mat = VIF_calculation(X)
+            end = time()
             n_VIF = VIF_mat["VIF"][0]
     return X
