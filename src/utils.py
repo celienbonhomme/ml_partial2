@@ -37,7 +37,7 @@ def model_evaluation_clf(model, X_test, y_test):
 
 def model_evaluation_lr(model, X_test, y_test):
     y_pred = model.predict(X_test)
-    mape = mean_absolute_percentage_error(y_test, y_pred)
+    mape = round(mean_absolute_percentage_error(y_test, y_pred), 3)
     rmse = round(np.sqrt(mean_squared_error(y_test, y_pred)), 3)
     r2 = round(r2_score(y_test, y_pred), 3)
     return {'mape': mape, 'rmse': rmse, 'r2': r2}
