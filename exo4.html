@@ -179,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Parcial practico 2
                 </a>
             </li>
         </ul>
@@ -636,6 +636,18 @@ document.write(`
 <p>I instantiated a dictionary of models containg their parameters and their future scores so that it will be easier to manage them later on</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">results_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">days</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
+        <span class="n">results_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="n">days</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;y_pred&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_days</span>
 </pre></div>
 </div>
@@ -786,17 +798,19 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">BayesSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="c1"># Create an empty dictionary to store the best parameters for each model</span>
 <span class="n">best_params</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
     <span class="n">best_params</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model_ready&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># Iterate over the models and perform parameter search</span>
 <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
     <span class="n">X_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">y_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">][</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">])])</span>
+        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">]))])</span>
         <span class="c1"># Get the parameter search space for the current model</span>
         <span class="n">param</span> <span class="o">=</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -807,25 +821,22 @@ document.write(`
         <span class="c1"># Fit the BayesSearchCV object to find the best parameters</span>
         <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
         
+        <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model_ready&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_cv</span><span class="p">)</span>
         <span class="c1"># Store the best parameters for the current model</span>
         <span class="n">best_params</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best parameters for </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> and with </span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">search_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Print the best parameters for each model</span>
-<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">best_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best parameters for </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">23</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># Fit the BayesSearchCV object to find the best parameters</span>
-<span class="ne">---&gt; </span><span class="mi">23</span> <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1"># Store the best parameters for the current model</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">best_params</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># Fit the BayesSearchCV object to find the best parameters</span>
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model_ready&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_cv</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="c1"># Store the best parameters for the current model</span>
 
 <span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/searchcv.py:538,</span> in <span class="ni">BayesSearchCV.fit</span><span class="nt">(self, X, y, groups, callback, **fit_params)</span>
 <span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refit</span><span class="p">):</span>
@@ -953,29 +964,24 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">626</span>     <span class="k">return</span> <span class="n">_minimize_tnc</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span>
 <span class="g g-Whitespace">    </span><span class="mi">627</span>                          <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/lbfgsb.py:306,</span> in <span class="ni">_minimize_lbfgsb</span><span class="nt">(fun, x0, args, jac, bounds, disp, maxcor, ftol, gtol, eps, maxfun, maxiter, iprint, callback, maxls, finite_diff_rel_step, **unknown_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>         <span class="n">iprint</span> <span class="o">=</span> <span class="n">disp</span>
-<span class="ne">--&gt; </span><span class="mi">306</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">_prepare_scalar_function</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">jac</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>                               <span class="n">bounds</span><span class="o">=</span><span class="n">new_bounds</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>                               <span class="n">finite_diff_rel_step</span><span class="o">=</span><span class="n">finite_diff_rel_step</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span> <span class="n">func_and_grad</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">fun_and_grad</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span> <span class="n">fortran_int</span> <span class="o">=</span> <span class="n">_lbfgsb</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">intvar</span><span class="o">.</span><span class="n">dtype</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/lbfgsb.py:360,</span> in <span class="ni">_minimize_lbfgsb</span><span class="nt">(fun, x0, args, jac, bounds, disp, maxcor, ftol, gtol, eps, maxfun, maxiter, iprint, callback, maxls, finite_diff_rel_step, **unknown_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span> <span class="n">task_str</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span> <span class="k">if</span> <span class="n">task_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;FG&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span>     <span class="c1"># The minimization routine wants f and g at the current x.</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span>     <span class="c1"># Note that interruptions due to maxfun are postponed</span>
+<span class="g g-Whitespace">    </span><span class="mi">358</span>     <span class="c1"># until the completion of the current minimization iteration.</span>
+<span class="g g-Whitespace">    </span><span class="mi">359</span>     <span class="c1"># Overwrite f and g:</span>
+<span class="ne">--&gt; </span><span class="mi">360</span>     <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">func_and_grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">361</span> <span class="k">elif</span> <span class="n">task_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;NEW_X&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span>     <span class="c1"># new iteration</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span>     <span class="n">n_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/optimize.py:261,</span> in <span class="ni">_prepare_scalar_function</span><span class="nt">(fun, x0, jac, args, bounds, epsilon, finite_diff_rel_step, hess)</span>
-<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="n">bounds</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="c1"># ScalarFunction caches. Reuse of fun(x) during grad</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="c1"># calculation reduces overall function evaluations.</span>
-<span class="ne">--&gt; </span><span class="mi">261</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">ScalarFunction</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span>                     <span class="n">finite_diff_rel_step</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">264</span> <span class="k">return</span> <span class="n">sf</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:140,</span> in <span class="ni">ScalarFunction.__init__</span><span class="nt">(self, fun, x0, args, grad, hess, finite_diff_rel_step, finite_diff_bounds, epsilon)</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fun_wrapped</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span> <span class="o">=</span> <span class="n">update_fun</span>
-<span class="ne">--&gt; </span><span class="mi">140</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="c1"># Gradient evaluation</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">grad</span><span class="p">):</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:267,</span> in <span class="ni">ScalarFunction.fun_and_grad</span><span class="nt">(self, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_update_x_impl</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">267</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">268</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_grad</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span>
 
 <span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:233,</span> in <span class="ni">ScalarFunction._update_fun</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">    </span><span class="mi">231</span> <span class="k">def</span> <span class="nf">_update_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1016,91 +1022,44 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="k">return</span> <span class="o">-</span><span class="n">lml</span><span class="p">,</span> <span class="o">-</span><span class="n">grad</span>
 <span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="k">else</span><span class="p">:</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:577,</span> in <span class="ni">GaussianProcessRegressor.log_marginal_likelihood</span><span class="nt">(self, theta, eval_gradient, clone_kernel)</span>
-<span class="g g-Whitespace">    </span><span class="mi">575</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span>     <span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_</span>
-<span class="ne">--&gt; </span><span class="mi">577</span>     <span class="n">kernel</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:580,</span> in <span class="ni">GaussianProcessRegressor.log_marginal_likelihood</span><span class="nt">(self, theta, eval_gradient, clone_kernel)</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="n">kernel</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span>
 <span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">if</span> <span class="n">eval_gradient</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">580</span>     <span class="n">K</span><span class="p">,</span> <span class="n">K_gradient</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">580</span>     <span class="n">K</span><span class="p">,</span> <span class="n">K_gradient</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">581</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">582</span>     <span class="n">K</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train_</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:743,</span> in <span class="ni">KernelOperator.theta</span><span class="nt">(self, theta)</span>
-<span class="g g-Whitespace">    </span><span class="mi">735</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Sets the (flattened, log-transformed) non-fixed hyperparameters.</span>
-<span class="g g-Whitespace">    </span><span class="mi">736</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">737</span><span class="sd"> Parameters</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:846,</span> in <span class="ni">Sum.__call__</span><span class="nt">(self, X, Y, eval_gradient)</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Return the kernel k(X, Y) and optionally its gradient.</span>
+<span class="g g-Whitespace">    </span><span class="mi">819</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span><span class="sd"> Parameters</span>
 <span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">740</span><span class="sd">     The non-fixed, log-transformed hyperparameters of the kernel</span>
-<span class="g g-Whitespace">    </span><span class="mi">741</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">742</span> <span class="n">k1_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="o">.</span><span class="n">n_dims</span>
-<span class="ne">--&gt; </span><span class="mi">743</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[:</span><span class="n">k1_dims</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">744</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">k1_dims</span><span class="p">:]</span>
+<span class="g g-Whitespace">    </span><span class="mi">843</span><span class="sd">     is True.</span>
+<span class="g g-Whitespace">    </span><span class="mi">844</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">845</span> <span class="k">if</span> <span class="n">eval_gradient</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">846</span>     <span class="n">K1</span><span class="p">,</span> <span class="n">K1_gradient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">847</span>     <span class="n">K2</span><span class="p">,</span> <span class="n">K2_gradient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">848</span>     <span class="k">return</span> <span class="n">K1</span> <span class="o">+</span> <span class="n">K2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">K1_gradient</span><span class="p">,</span> <span class="n">K2_gradient</span><span class="p">))</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:742,</span> in <span class="ni">KernelOperator.theta</span><span class="nt">(self, theta)</span>
-<span class="g g-Whitespace">    </span><span class="mi">733</span> <span class="nd">@theta</span><span class="o">.</span><span class="n">setter</span>
-<span class="g g-Whitespace">    </span><span class="mi">734</span> <span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">735</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Sets the (flattened, log-transformed) non-fixed hyperparameters.</span>
-<span class="g g-Whitespace">    </span><span class="mi">736</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">737</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">740</span><span class="sd">         The non-fixed, log-transformed hyperparameters of the kernel</span>
-<span class="g g-Whitespace">    </span><span class="mi">741</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">742</span>     <span class="n">k1_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="o">.</span><span class="n">n_dims</span>
-<span class="g g-Whitespace">    </span><span class="mi">743</span>     <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[:</span><span class="n">k1_dims</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">744</span>     <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">k1_dims</span><span class="p">:]</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:945,</span> in <span class="ni">Product.__call__</span><span class="nt">(self, X, Y, eval_gradient)</span>
+<span class="g g-Whitespace">    </span><span class="mi">943</span> <span class="k">if</span> <span class="n">eval_gradient</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">944</span>     <span class="n">K1</span><span class="p">,</span> <span class="n">K1_gradient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">945</span>     <span class="n">K2</span><span class="p">,</span> <span class="n">K2_gradient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span>     <span class="k">return</span> <span class="n">K1</span> <span class="o">*</span> <span class="n">K2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span>         <span class="p">(</span><span class="n">K1_gradient</span> <span class="o">*</span> <span class="n">K2</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">K2_gradient</span> <span class="o">*</span> <span class="n">K1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">948</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">949</span> <span class="k">else</span><span class="p">:</span>
 
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:257,</span> in <span class="ni">Kernel.n_dims</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="nd">@property</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">def</span> <span class="nf">n_dims</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">256</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Returns the number of non-fixed hyperparameters of the kernel.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">257</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:284,</span> in <span class="ni">Kernel.theta</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">271</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Returns the (flattened, log-transformed) non-fixed hyperparameters.</span>
-<span class="g g-Whitespace">    </span><span class="mi">272</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">273</span><span class="sd"> Note that theta are typically the log-transformed values of the</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="sd">     The non-fixed, log-transformed hyperparameters of the kernel</span>
-<span class="g g-Whitespace">    </span><span class="mi">282</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">283</span> <span class="n">theta</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="ne">--&gt; </span><span class="mi">284</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">285</span> <span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">hyperparameter</span><span class="o">.</span><span class="n">fixed</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/kernels.py:182,</span> in <span class="ni">Kernel.get_params</span><span class="nt">(self, deep)</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">init</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">,</span> <span class="s2">&quot;deprecated_original&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">182</span> <span class="n">init_sign</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">183</span> <span class="n">args</span><span class="p">,</span> <span class="n">varargs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">init_sign</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/inspect.py:3113,</span> in <span class="ni">signature</span><span class="nt">(obj, follow_wrapped)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3111</span> <span class="k">def</span> <span class="nf">signature</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3112</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get a signature object for the passed callable.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">3113</span>     <span class="k">return</span> <span class="n">Signature</span><span class="o">.</span><span class="n">from_callable</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="n">follow_wrapped</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/inspect.py:2862,</span> in <span class="ni">Signature.from_callable</span><span class="nt">(cls, obj, follow_wrapped)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2859</span> <span class="nd">@classmethod</span>
-<span class="g g-Whitespace">   </span><span class="mi">2860</span> <span class="k">def</span> <span class="nf">from_callable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2861</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Constructs Signature for the given callable object.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">2862</span>     <span class="k">return</span> <span class="n">_signature_from_callable</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">sigcls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2863</span>                                     <span class="n">follow_wrapper_chains</span><span class="o">=</span><span class="n">follow_wrapped</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/inspect.py:2325,</span> in <span class="ni">_signature_from_callable</span><span class="nt">(obj, follow_wrapper_chains, skip_bound_arg, sigcls)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2320</span>             <span class="k">return</span> <span class="n">sig</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">new_params</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2322</span> <span class="k">if</span> <span class="n">isfunction</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_signature_is_functionlike</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2323</span>     <span class="c1"># If it&#39;s a pure Python function, or an object that is duck type</span>
-<span class="g g-Whitespace">   </span><span class="mi">2324</span>     <span class="c1"># of a Python function (Cython functions, for instance), then:</span>
-<span class="ne">-&gt; </span><span class="mi">2325</span>     <span class="k">return</span> <span class="n">_signature_from_function</span><span class="p">(</span><span class="n">sigcls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2326</span>                                     <span class="n">skip_bound_arg</span><span class="o">=</span><span class="n">skip_bound_arg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2328</span> <span class="k">if</span> <span class="n">_signature_is_builtin</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2329</span>     <span class="k">return</span> <span class="n">_signature_from_builtin</span><span class="p">(</span><span class="n">sigcls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2330</span>                                    <span class="n">skip_bound_arg</span><span class="o">=</span><span class="n">skip_bound_arg</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/inspect.py:2172,</span> in <span class="ni">_signature_from_function</span><span class="nt">(cls, func, skip_bound_arg)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2170</span> <span class="c1"># Parameter information.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2171</span> <span class="n">func_code</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__code__</span>
-<span class="ne">-&gt; </span><span class="mi">2172</span> <span class="n">pos_count</span> <span class="o">=</span> <span class="n">func_code</span><span class="o">.</span><span class="n">co_argcount</span>
-<span class="g g-Whitespace">   </span><span class="mi">2173</span> <span class="n">arg_names</span> <span class="o">=</span> <span class="n">func_code</span><span class="o">.</span><span class="n">co_varnames</span>
-<span class="g g-Whitespace">   </span><span class="mi">2174</span> <span class="n">posonly_count</span> <span class="o">=</span> <span class="n">func_code</span><span class="o">.</span><span class="n">co_posonlyargcount</span>
+<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/learning/gaussian_process/kernels.py:401,</span> in <span class="ni">HammingKernel.__call__</span><span class="nt">(self, X, Y, eval_gradient)</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span>     <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">401</span> <span class="n">indicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">Y</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span> <span class="n">kernel_prod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">length_scale</span> <span class="o">*</span> <span class="n">indicator</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="c1"># dK / d theta = (dK / dl) * (dl / d theta)</span>
+<span class="g g-Whitespace">    </span><span class="mi">405</span> <span class="c1"># theta = log(l) =&gt; dl / d (theta) = e^theta = l</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span> <span class="c1"># dK / d theta = l * dK / dl</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span> 
+<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="c1"># dK / dL computation</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1108,6 +1067,17 @@ document.write(`
 </div>
 </div>
 <p>How we can see every model has different best hyperparamaters for every scenario of validation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for model in model_dict.keys():</span>
+<span class="c1">#     for param in best_params[model]:</span>
+<span class="c1">#         for key in param.keys():</span>
+<span class="c1">#             print(key)</span>
+<span class="c1">#             param[key[6:]] = param.pop(key)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Now we will train every model for each scenario, using (7,14,21,28) days as training dataset and the following day as validation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1118,6 +1088,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_percentage_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>
 
 
 <span class="n">trained_models</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1125,39 +1096,31 @@ document.write(`
 <span class="c1"># Iterate over each model and train them</span>
 <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s1">...&#39;</span><span class="p">)</span>
-    
-    <span class="c1"># Create a pipeline with a scaler and the model</span>
     <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">])])</span>
     <span class="n">rmse_scores</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">mape_scores</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">r2_scores</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c1"># Iterate over the sliding window</span>
     <span class="k">for</span> <span class="n">n_days</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
-        <span class="n">model_tmp</span> <span class="o">=</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">best_params</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[]):</span>
-            <span class="n">model_tmp</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="n">best_params</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="n">number_of_days</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n_days</span><span class="p">)])</span>
-        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">])])</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s1"> with </span><span class="si">{</span><span class="n">n_days</span><span class="si">}</span><span class="s1"> days...&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">dfWind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span>
-            <span class="c1"># Get the training data</span>
+            <span class="n">model_tmp</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model_ready&#39;</span><span class="p">][</span><span class="n">number_of_days</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n_days</span><span class="p">)])</span>
+            <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">])])</span>
             <span class="n">X_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n_days</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">y_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n_days</span><span class="o">*</span><span class="mi">24</span><span class="p">][</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">]</span>            
-            <span class="c1"># Fit the model</span>
             <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-            <span class="c1">#print(f&#39;Window {i+1}-{i+7}: Model fitted!&#39;)</span>
-            <span class="c1"># Validate the model</span>
             <span class="n">X_valid</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">n_days</span><span class="o">*</span><span class="mi">24</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="p">((</span><span class="n">n_days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">)]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">y_valid</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">n_days</span><span class="o">*</span><span class="mi">24</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="p">((</span><span class="n">n_days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">)][</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">]</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
             <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_valid</span>
             <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+            <span class="n">results_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="n">n_days</span><span class="p">][</span><span class="s1">&#39;y_pred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+            <span class="n">results_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="n">n_days</span><span class="p">][</span><span class="s1">&#39;y_test&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
             <span class="n">rmse_score</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
             <span class="n">mape_score</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
             <span class="n">r2_score_tmp</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
             <span class="n">rmse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmse_score</span><span class="p">)</span>
             <span class="n">mape_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mape_score</span><span class="p">)</span>
             <span class="n">r2_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_score_tmp</span><span class="p">)</span>
-            <span class="c1">#print(f&#39;Window {i}-{i+6}: Score = {score}&#39;) </span>
         <span class="c1"># Save the scores</span>
         <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;MAPE_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mape_scores</span><span class="p">))</span>
         <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;R2_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r2_scores</span><span class="p">))</span>
@@ -1174,132 +1137,27 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Decision Tree...
-Training Decision Tree with 7 days...
-Decision Tree trained!
-MAPE: [80200798239406.03]
-R2: [0.362329532114189]
-RMSE: [0.5812604669144814]
-Training Decision Tree with 14 days...
-Decision Tree trained!
-MAPE: [80200798239406.03, 88711873783999.02]
-R2: [0.362329532114189, 0.47364411826624664]
-RMSE: [0.5812604669144814, 0.4817635708201701]
-Training Decision Tree with 21 days...
-Decision Tree trained!
-MAPE: [80200798239406.03, 88711873783999.02, 103043452094794.83]
-R2: [0.362329532114189, 0.47364411826624664, 0.4479596262008063]
-RMSE: [0.5812604669144814, 0.4817635708201701, 0.5004075012333904]
-Training Decision Tree with 28 days...
-Decision Tree trained!
-MAPE: [80200798239406.03, 88711873783999.02, 103043452094794.83, 72295978716041.75]
-R2: [0.362329532114189, 0.47364411826624664, 0.4479596262008063, 0.5034122717854398]
-RMSE: [0.5812604669144814, 0.4817635708201701, 0.5004075012333904, 0.4457925095100728]
-Training Random Forest...
-Training Random Forest with 7 days...
-Random Forest trained!
-MAPE: [81607234341902.56]
-R2: [0.5446504505277066]
-RMSE: [0.4217273773627547]
-Training Random Forest with 14 days...
-Random Forest trained!
-MAPE: [81607234341902.56, 73368485888530.53]
-R2: [0.5446504505277066, 0.5870522624137625]
-RMSE: [0.4217273773627547, 0.38262266359355546]
-Training Random Forest with 21 days...
-Random Forest trained!
-MAPE: [81607234341902.56, 73368485888530.53, 77910419980004.86]
-R2: [0.5446504505277066, 0.5870522624137625, 0.5645065018813064]
-RMSE: [0.4217273773627547, 0.38262266359355546, 0.3981726840078157]
-Training Random Forest with 28 days...
-Random Forest trained!
-MAPE: [81607234341902.56, 73368485888530.53, 77910419980004.86, 67906817030324.336]
-R2: [0.5446504505277066, 0.5870522624137625, 0.5645065018813064, 0.6072123010567742]
-RMSE: [0.4217273773627547, 0.38262266359355546, 0.3981726840078157, 0.36327904126460725]
-Training Gradient Boosting...
-Training Gradient Boosting with 7 days...
-Gradient Boosting trained!
-MAPE: [82003114542011.16]
-R2: [0.524809721228212]
-RMSE: [0.4411063483970683]
-Training Gradient Boosting with 14 days...
-Gradient Boosting trained!
-MAPE: [82003114542011.16, 85131749820761.67]
-R2: [0.524809721228212, 0.5773859178516063]
-RMSE: [0.4411063483970683, 0.3909666440258513]
-Training Gradient Boosting with 21 days...
-Gradient Boosting trained!
-MAPE: [82003114542011.16, 85131749820761.67, 84421806169916.22]
-R2: [0.524809721228212, 0.5773859178516063, 0.5910344481794995]
-RMSE: [0.4411063483970683, 0.3909666440258513, 0.3771596829807505]
-Training Gradient Boosting with 28 days...
-Gradient Boosting trained!
-MAPE: [82003114542011.16, 85131749820761.67, 84421806169916.22, 74488197785733.05]
-R2: [0.524809721228212, 0.5773859178516063, 0.5910344481794995, 0.6070234312123858]
-RMSE: [0.4411063483970683, 0.3909666440258513, 0.3771596829807505, 0.3630620006776562]
-Training Knn...
-Training Knn with 7 days...
-Knn trained!
-MAPE: [142360027014206.3]
-R2: [0.08283070051992217]
-RMSE: [0.8462401326368166]
-Training Knn with 14 days...
-Knn trained!
-MAPE: [142360027014206.3, 129573827181546.03]
-R2: [0.08283070051992217, 0.23456601106785016]
-RMSE: [0.8462401326368166, 0.704619547738372]
-Training Knn with 21 days...
-Knn trained!
-MAPE: [142360027014206.3, 129573827181546.03, 117461717368969.97]
-R2: [0.08283070051992217, 0.23456601106785016, 0.33346870100809894]
-RMSE: [0.8462401326368166, 0.704619547738372, 0.6110292735429359]
-Training Knn with 28 days...
-Knn trained!
-MAPE: [142360027014206.3, 129573827181546.03, 117461717368969.97, 115592976424788.28]
-R2: [0.08283070051992217, 0.23456601106785016, 0.33346870100809894, 0.367164370990714]
-RMSE: [0.8462401326368166, 0.704619547738372, 0.6110292735429359, 0.5823978261909105]
-Training Ridge...
-Training Ridge with 7 days...
-Ridge trained!
-MAPE: [80199974870099.66]
-R2: [0.05274932260140909]
-RMSE: [1.065638871999733]
-Training Ridge with 14 days...
-Ridge trained!
-MAPE: [80199974870099.66, 73375182454305.6]
-R2: [0.05274932260140909, 0.45702171187075535]
-RMSE: [1.065638871999733, 0.5611914819484466]
-Training Ridge with 21 days...
-Ridge trained!
-MAPE: [80199974870099.66, 73375182454305.6, 66549914836640.19]
-R2: [0.05274932260140909, 0.45702171187075535, 0.01336771981694366]
-RMSE: [1.065638871999733, 0.5611914819484466, 0.7194884036617185]
-Training Ridge with 28 days...
-Ridge trained!
-MAPE: [80199974870099.66, 73375182454305.6, 66549914836640.19, 66643424435900.59]
-R2: [0.05274932260140909, 0.45702171187075535, 0.01336771981694366, 0.15791517738057215]
-RMSE: [1.065638871999733, 0.5611914819484466, 0.7194884036617185, 0.6619650549578425]
-Training Lasso...
-Training Lasso with 7 days...
-Lasso trained!
-MAPE: [74378838839515.5]
-R2: [0.12183153540335999]
-RMSE: [0.9470053589953064]
-Training Lasso with 14 days...
-Lasso trained!
-MAPE: [74378838839515.5, 71431795199399.72]
-R2: [0.12183153540335999, 0.5167132355339938]
-RMSE: [0.9470053589953064, 0.4715664348469726]
-Training Lasso with 21 days...
-Lasso trained!
-MAPE: [74378838839515.5, 71431795199399.72, 71167750238712.58]
-R2: [0.12183153540335999, 0.5167132355339938, 0.5508513599756621]
-RMSE: [0.9470053589953064, 0.4715664348469726, 0.40124047701184345]
-Training Lasso with 28 days...
-Lasso trained!
-MAPE: [74378838839515.5, 71431795199399.72, 71167750238712.58, 67227504097171.516]
-R2: [0.12183153540335999, 0.5167132355339938, 0.5508513599756621, 0.27375066653110464]
-RMSE: [0.9470053589953064, 0.4715664348469726, 0.40124047701184345, 0.58323813416684]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Bayesan Ridge...
+Training Bayesan Ridge with 7 days...
+Bayesan Ridge trained!
+MAPE: [73898798301139.05]
+R2: [-0.06712612345592733]
+RMSE: [1.2550013476282504]
+Training Bayesan Ridge with 14 days...
+Bayesan Ridge trained!
+MAPE: [73898798301139.05, 68914432611756.83]
+R2: [-0.06712612345592733, 0.26625958763597585]
+RMSE: [1.2550013476282504, 0.7262360716599138]
+Training Bayesan Ridge with 21 days...
+Bayesan Ridge trained!
+MAPE: [73898798301139.05, 68914432611756.83, 67492324032848.99]
+R2: [-0.06712612345592733, 0.26625958763597585, 0.09949856424185008]
+RMSE: [1.2550013476282504, 0.7262360716599138, 0.6554768651759865]
+Training Bayesan Ridge with 28 days...
+Bayesan Ridge trained!
+MAPE: [73898798301139.05, 68914432611756.83, 67492324032848.99, 67383275300127.99]
+R2: [-0.06712612345592733, 0.26625958763597585, 0.09949856424185008, 0.22216342362020222]
+RMSE: [1.2550013476282504, 0.7262360716599138, 0.6554768651759865, 0.6075941838352815]
 </pre></div>
 </div>
 </div>
@@ -1336,7 +1194,27 @@ RMSE: [0.9470053589953064, 0.4715664348469726, 0.40124047701184345, 0.5832381341
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Decision Tree&#39;: {&#39;model&#39;: DecisionTreeRegressor(max_depth=20, min_samples_split=0.1, random_state=42), &#39;grid&#39;: {&#39;max_depth&#39;: (1, 20), &#39;min_samples_split&#39;: (0.1, 1.0)}, &#39;MAPE_score&#39;: [80200798239406.03, 88711873783999.02, 103043452094794.83, 72295978716041.75], &#39;R2_score&#39;: [0.362329532114189, 0.47364411826624664, 0.4479596262008063, 0.5034122717854398], &#39;RMSE_score&#39;: [0.5812604669144814, 0.4817635708201701, 0.5004075012333904, 0.4457925095100728]}, &#39;Random Forest&#39;: {&#39;model&#39;: RandomForestRegressor(max_depth=6, n_estimators=200, random_state=42), &#39;grid&#39;: {&#39;max_depth&#39;: (1, 20), &#39;n_estimators&#39;: [100, 200, 300]}, &#39;n_estimators&#39;: range(1, 20), &#39;MAPE_score&#39;: [81607234341902.56, 73368485888530.53, 77910419980004.86, 67906817030324.336], &#39;R2_score&#39;: [0.5446504505277066, 0.5870522624137625, 0.5645065018813064, 0.6072123010567742], &#39;RMSE_score&#39;: [0.4217273773627547, 0.38262266359355546, 0.3981726840078157, 0.36327904126460725]}, &#39;Gradient Boosting&#39;: {&#39;model&#39;: GradientBoostingRegressor(min_samples_split=0.7988052095783587, random_state=42), &#39;grid&#39;: {&#39;max_depth&#39;: (1, 20), &#39;min_samples_split&#39;: (0.1, 1.0)}, &#39;MAPE_score&#39;: [82003114542011.16, 85131749820761.67, 84421806169916.22, 74488197785733.05], &#39;R2_score&#39;: [0.524809721228212, 0.5773859178516063, 0.5910344481794995, 0.6070234312123858], &#39;RMSE_score&#39;: [0.4411063483970683, 0.3909666440258513, 0.3771596829807505, 0.3630620006776562]}, &#39;Knn&#39;: {&#39;model&#39;: KNeighborsRegressor(n_neighbors=16), &#39;grid&#39;: {&#39;n_neighbors&#39;: (1, 20)}, &#39;MAPE_score&#39;: [142360027014206.3, 129573827181546.03, 117461717368969.97, 115592976424788.28], &#39;R2_score&#39;: [0.08283070051992217, 0.23456601106785016, 0.33346870100809894, 0.367164370990714], &#39;RMSE_score&#39;: [0.8462401326368166, 0.704619547738372, 0.6110292735429359, 0.5823978261909105]}, &#39;Ridge&#39;: {&#39;model&#39;: Ridge(alpha=0.1), &#39;grid&#39;: {&#39;alpha&#39;: [0.001, 0.01, 0.1, 1, 10, 100, 1000]}, &#39;MAPE_score&#39;: [80199974870099.66, 73375182454305.6, 66549914836640.19, 66643424435900.59], &#39;R2_score&#39;: [0.05274932260140909, 0.45702171187075535, 0.01336771981694366, 0.15791517738057215], &#39;RMSE_score&#39;: [1.065638871999733, 0.5611914819484466, 0.7194884036617185, 0.6619650549578425]}, &#39;Lasso&#39;: {&#39;model&#39;: Lasso(alpha=0.001), &#39;grid&#39;: {&#39;alpha&#39;: [0.001, 0.01, 0.1, 1, 10, 100, 1000]}, &#39;MAPE_score&#39;: [74378838839515.5, 71431795199399.72, 71167750238712.58, 67227504097171.516], &#39;R2_score&#39;: [0.12183153540335999, 0.5167132355339938, 0.5508513599756621, 0.27375066653110464], &#39;RMSE_score&#39;: [0.9470053589953064, 0.4715664348469726, 0.40124047701184345, 0.58323813416684]}}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Bayesan Ridge&#39;: {&#39;model&#39;: BayesianRidge(), &#39;grid&#39;: {&#39;model__alpha_1&#39;: [1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1]}, &#39;MAPE_score&#39;: [73898798301139.05, 68914432611756.83, 67492324032848.99, 67383275300127.99], &#39;R2_score&#39;: [-0.06712612345592733, 0.26625958763597585, 0.09949856424185008, 0.22216342362020222], &#39;RMSE_score&#39;: [1.2550013476282504, 0.7262360716599138, 0.6554768651759865, 0.6075941838352815], &#39;model_ready&#39;: [BayesSearchCV(cv=5,
+              estimator=Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+                                        (&#39;model&#39;, BayesianRidge())]),
+              random_state=42,
+              search_spaces={&#39;model__alpha_1&#39;: [1e-06, 1e-05, 0.0001, 0.001,
+                                                0.01, 0.1]}), BayesSearchCV(cv=5,
+              estimator=Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+                                        (&#39;model&#39;, BayesianRidge())]),
+              random_state=42,
+              search_spaces={&#39;model__alpha_1&#39;: [1e-06, 1e-05, 0.0001, 0.001,
+                                                0.01, 0.1]}), BayesSearchCV(cv=5,
+              estimator=Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+                                        (&#39;model&#39;, BayesianRidge())]),
+              random_state=42,
+              search_spaces={&#39;model__alpha_1&#39;: [1e-06, 1e-05, 0.0001, 0.001,
+                                                0.01, 0.1]}), BayesSearchCV(cv=5,
+              estimator=Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+                                        (&#39;model&#39;, BayesianRidge())]),
+              random_state=42,
+              search_spaces={&#39;model__alpha_1&#39;: [1e-06, 1e-05, 0.0001, 0.001,
+                                                0.01, 0.1]})]}}
 </pre></div>
 </div>
 </div>
@@ -1386,37 +1264,17 @@ RMSE: [0.9470053589953064, 0.4715664348469726, 0.40124047701184345, 0.5832381341
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of days: 7
-            Model       R2         MAPE     RMSE
-    Decision Tree 0.362330 8.020080e+13 0.581260
-    Random Forest 0.544650 8.160723e+13 0.421727
-Gradient Boosting 0.524810 8.200311e+13 0.441106
-              Knn 0.082831 1.423600e+14 0.846240
-            Ridge 0.052749 8.019997e+13 1.065639
-            Lasso 0.121832 7.437884e+13 0.947005
+        Model        R2         MAPE     RMSE
+Bayesan Ridge -0.067126 7.389880e+13 1.255001
 Number of days: 14
-            Model       R2         MAPE     RMSE
-    Decision Tree 0.473644 8.871187e+13 0.481764
-    Random Forest 0.587052 7.336849e+13 0.382623
-Gradient Boosting 0.577386 8.513175e+13 0.390967
-              Knn 0.234566 1.295738e+14 0.704620
-            Ridge 0.457022 7.337518e+13 0.561191
-            Lasso 0.516713 7.143180e+13 0.471566
+        Model      R2         MAPE     RMSE
+Bayesan Ridge 0.26626 6.891443e+13 0.726236
 Number of days: 21
-            Model       R2         MAPE     RMSE
-    Decision Tree 0.447960 1.030435e+14 0.500408
-    Random Forest 0.564507 7.791042e+13 0.398173
-Gradient Boosting 0.591034 8.442181e+13 0.377160
-              Knn 0.333469 1.174617e+14 0.611029
-            Ridge 0.013368 6.654991e+13 0.719488
-            Lasso 0.550851 7.116775e+13 0.401240
+        Model       R2         MAPE     RMSE
+Bayesan Ridge 0.099499 6.749232e+13 0.655477
 Number of days: 28
-            Model       R2         MAPE     RMSE
-    Decision Tree 0.503412 7.229598e+13 0.445793
-    Random Forest 0.607212 6.790682e+13 0.363279
-Gradient Boosting 0.607023 7.448820e+13 0.363062
-              Knn 0.367164 1.155930e+14 0.582398
-            Ridge 0.157915 6.664342e+13 0.661965
-            Lasso 0.273751 6.722750e+13 0.583238
+        Model       R2         MAPE     RMSE
+Bayesan Ridge 0.222163 6.738328e+13 0.607594
 </pre></div>
 </div>
 </div>
@@ -1476,51 +1334,11 @@ Gradient Boosting 0.607023 7.448820e+13 0.363062
   <tbody>
     <tr>
       <th>0</th>
-      <td>Decision Tree</td>
-      <td>0.581260</td>
-      <td>0.481764</td>
-      <td>0.500408</td>
-      <td>0.445793</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Random Forest</td>
-      <td>0.421727</td>
-      <td>0.382623</td>
-      <td>0.398173</td>
-      <td>0.363279</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Gradient Boosting</td>
-      <td>0.441106</td>
-      <td>0.390967</td>
-      <td>0.377160</td>
-      <td>0.363062</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Knn</td>
-      <td>0.846240</td>
-      <td>0.704620</td>
-      <td>0.611029</td>
-      <td>0.582398</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ridge</td>
-      <td>1.065639</td>
-      <td>0.561191</td>
-      <td>0.719488</td>
-      <td>0.661965</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Lasso</td>
-      <td>0.947005</td>
-      <td>0.471566</td>
-      <td>0.401240</td>
-      <td>0.583238</td>
+      <td>Bayesan Ridge</td>
+      <td>1.255001</td>
+      <td>0.726236</td>
+      <td>0.655477</td>
+      <td>0.607594</td>
     </tr>
   </tbody>
 </table>
@@ -1533,19 +1351,32 @@ Gradient Boosting 0.607023 7.448820e+13 0.363062
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The best model is Gradient Boosting with a RMSE of 0.3630620006776562, and 28 days of training
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The best model is Bayesan Ridge with a RMSE of 0.6075941838352815, and 28 days of training
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="kn">import</span> <span class="n">BayesianOptimization</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot the best model results</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-
-<span class="n">BayesianOptimization</span><span class="p">()</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">num_days</span><span class="p">][</span><span class="s1">&#39;y_pred&#39;</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">num_days</span><span class="p">][</span><span class="s1">&#39;y_test&#39;</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="o">-</span><span class="mi">500</span><span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[</span><span class="o">-</span><span class="mi">500</span><span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best model: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s1"> with </span><span class="si">{</span><span class="n">num_days</span><span class="si">}</span><span class="s1"> days of training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c70daf2c2dfbd0e4e3757b52eddd15c807b885cdb7b6acbbda09f32269a6cc48.png" src="_images/c70daf2c2dfbd0e4e3757b52eddd15c807b885cdb7b6acbbda09f32269a6cc48.png" />
 </div>
 </div>
 </section>

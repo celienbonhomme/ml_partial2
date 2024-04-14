@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['from sklearn.discriminant_analysis import StandardScaler', 'from skopt import BayesSearchCV', 'from sklearn.pipeline import Pipeline', '# Create an empty dictionary to store the best parameters for each model', 'best_params = {}']
+['from sklearn.discriminant_analysis import StandardScaler', 'from skopt import BayesSearchCV', 'from sklearn.pipeline import Pipeline', 'from copy import deepcopy', '# Create an empty dictionary to store the best parameters for each model']
 ...
-['        print(f"Best parameters for {model} and with {numDays}: {search_cv.best_params_}")', '', '# Print the best parameters for each model', 'for model_name, params in best_params.items():', '    print(f"Best parameters for {model_name}: {params}")']
+['        ', "        model_dict[model]['model_ready'].append(search_cv)", '        # Store the best parameters for the current model', '        best_params[model].append(search_cv.best_params_)', '        print(f"Best parameters for {model} and with {numDays}: {search_cv.best_params_}")']
 -------------------
 

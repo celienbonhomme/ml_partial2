@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Boston Housing" href="exo1_housing.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="prev" title="Parcial practico 2" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Parcial practico 2
                 </a>
             </li>
         </ul>
@@ -607,6 +607,7 @@ Gradient Boosting (sc)     0.965      0.964   0.981     0.972 0.959
 </div>
 </div>
 </div>
+<p>We obtain the same results by hand and with GridSearchCV so we only plot for GridSearchCV models</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -637,6 +638,7 @@ Gradient Boosting (sc)     0.965      0.964   0.981     0.972 0.959
 <img alt="_images/c2c6490b80e9eae9793367b5c3aa80a70cb3c0e47181e40fef5287f53e123ba9.png" src="_images/c2c6490b80e9eae9793367b5c3aa80a70cb3c0e47181e40fef5287f53e123ba9.png" />
 </div>
 </div>
+<p>We obtain the best results with Random Forest, the scaling doesn’t have effect on Random Forest so we choose not to use it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
@@ -666,6 +668,7 @@ Gradient Boosting (sc)     0.965      0.964   0.981     0.972 0.959
 <img alt="_images/076196704eca1522230af41c1ae129971c81bc0ae3ea5c798837c33f235654f2.png" src="_images/076196704eca1522230af41c1ae129971c81bc0ae3ea5c798837c33f235654f2.png" />
 </div>
 </div>
+<p>The roc curves show that except for the Naive Bayes Model, the models have a low rate of false positives and a high rate of true positives negatives.</p>
 </section>
 </section>
 </section>
@@ -706,7 +709,7 @@ Gradient Boosting (sc)     0.965      0.964   0.981     0.972 0.959
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        <p class="prev-next-title">Parcial practico 2</p>
       </div>
     </a>
     <a class="right-next"

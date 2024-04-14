@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+    result = await obj
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/jupyter_client/channels.py", line 315, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 1314, in execute
@@ -9,34 +20,18 @@ Traceback (most recent call last):
     return future.result()
   File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-import plotly.graph_objects as go
-
-for col in data_eda.columns:
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatter(x=data_wind['Fecha'], y=data_wind[col], mode='lines', name=col))
-
-    fig.update_layout(title=f'{col} over time',
-                  xaxis_title='Date', 
-                  yaxis_title=col,
-                  margin=dict(l=20, r=20, t=40, b=20))
-    fig.show()
-
-------------------
-
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[18], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mplotly[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgraph_objects[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgo[39;00m
-[1;32m      3[0m [38;5;28;01mfor[39;00m col [38;5;129;01min[39;00m data_eda[38;5;241m.[39mcolumns:
-[1;32m      4[0m     fig [38;5;241m=[39m go[38;5;241m.[39mFigure()
-
-[0;31mModuleNotFoundError[0m: No module named 'plotly'
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['import seaborn as sns', 'import matplotlib.pyplot as plt', '', 'fig, axs = plt.subplots(4, 3, figsize=(20, 20))', '']
+...
+["    sns.regplot(data=data_eda, x='Velocidad horario del viento (m/s)', y=column, ax=axs[i//3, i%3])", '    axs[i//3, i%3].set_title(column)', '', 'plt.tight_layout()', 'plt.show()']
+-------------------
 

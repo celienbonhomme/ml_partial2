@@ -180,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Parcial practico 2
                 </a>
             </li>
         </ul>
@@ -722,6 +722,7 @@ document.write(`
 <p>10 rows × 434 columns</p>
 </div></div></div>
 </div>
+<p>Visually, we can see a lot of missing values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span>
@@ -734,6 +735,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>We have o lot of columns so we have to reduce the dimension</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -750,19 +752,22 @@ memory usage: 1.9+ GB
 </div>
 </div>
 </div>
+<p>We have a lot of object columns, which we will need to convert to numerical columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb_missing_values</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">percentage_missing_values</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">nb_missing_values</span> <span class="o">/</span> <span class="p">(</span><span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing values: </span><span class="si">{</span><span class="n">nb_missing_values</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">percentage_missing_values</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>115523073
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Missing values: 115523073 (45.1%)
 </pre></div>
 </div>
 </div>
 </div>
-<p>We have a lot of missing values</p>
+<p>We have a lot of missing values: more than 45%</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_data_count</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -855,9 +860,11 @@ memory usage: 1.9+ GB
 </table>
 </div></div></div>
 </div>
+<p>For some columns, the missing data percentage is very high. We will have to see if we delete them or if the missing values give information.</p>
 </section>
 <section id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">#</a></h2>
+<p>To encode object data, we use a OneHotEncoder</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
@@ -893,6 +900,8 @@ memory usage: 1.9+ GB
 </div>
 </div>
 </div>
+<p>Now we have an even higher number of columns.</p>
+<p>Let’s see the linear correlation between the columns and the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -911,6 +920,7 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>Some columns have a quite high correlation with the output. We can try to eliminate the variables with the lowest correlation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -939,7 +949,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 </div>
 </div>
-<p>But before that, let’s see the correlation between each variable and the output to be sure we are not eliminating a relevant variable.</p>
+<p>If we eliminate all the columns which have a correlation lower than 0.05, we still keep a lot of columns. But we eliminate more than 2000 variable, most of them are from the encoder which mean some values of the encoder don’t have correlation with the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.05</span>
@@ -975,6 +985,7 @@ Missing values eliminated: 55304710
 </div>
 </div>
 </div>
+<p>By eliminating these 2618 columns, we also have eliminated almost half of the missing values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_filtered</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -1182,6 +1193,7 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </div>
 </div>
 </div>
+<p>Now, we are going to impute values to train models on it.</p>
 </section>
 <section id="imputation-of-data">
 <h3>Imputation of data<a class="headerlink" href="#imputation-of-data" title="Link to this heading">#</a></h3>
@@ -1208,6 +1220,8 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </div>
 </div>
 </div>
+<p>Now we can reduce again the dimension eliminating multicolinearity. To do this, we are going to use the Variance Inflation Factor (VIF). A VIF higher than 10 reveals a high multicolinearity so we can delete these variables.</p>
+<p>Calculating the VIF require a lot of time so we are going to use a random sample to eliminate the multicolinearity.</p>
 </section>
 <section id="delete-multicolinearity-with-vif-on-a-sample">
 <h3>Delete multicolinearity with VIF on a sample<a class="headerlink" href="#delete-multicolinearity-with-vif-on-a-sample" title="Link to this heading">#</a></h3>
@@ -1418,6 +1432,7 @@ Dropped column M4_nan with VIF: 10.2 (0s)
 </div>
 </div>
 </div>
+<p>Now we have 59 columns to train our models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">df_fraud_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df_fraud_final</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1436,6 +1451,7 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>Some of these columns have a good correlation with the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_final</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_final.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1640,6 +1656,7 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </table>
 </div></div></div>
 </div>
+<p>The repartition of the values is very umbalanced. For exemple, for ‘V34’, we have the same 1st and 3rd quartile (0), which means that more than 75% of the values are equal to 0. The same goes for ‘V56’ and ‘V70’.</p>
 </section>
 <section id="histplot">
 <h3>Histplot<a class="headerlink" href="#histplot" title="Link to this heading">#</a></h3>
@@ -1666,6 +1683,8 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 <img alt="_images/1ecc935a27592a450b8f5471838a6926f8dc71fb6816e4f241fda42fa7daee38.png" src="_images/1ecc935a27592a450b8f5471838a6926f8dc71fb6816e4f241fda42fa7daee38.png" />
 </div>
 </div>
+<p>With these histoplot, we can validate that the data is very unbalanced. We can see that the data is very skewed and that the distribution is not normal. This can be because of the presence of outliers in the data. We can also see that the data is very sparse, with a lot of zeros in the data. This can be because of the presence of missing values in the data.</p>
+<p>Let’s see if we have outliers with plot</p>
 </section>
 <section id="boxplot">
 <h3>Boxplot<a class="headerlink" href="#boxplot" title="Link to this heading">#</a></h3>
@@ -1691,6 +1710,8 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 <img alt="_images/9f4eb277600ec3e09fee845ddf77da6931fb3a5fd628dffe30c359eb9c43204f.png" src="_images/9f4eb277600ec3e09fee845ddf77da6931fb3a5fd628dffe30c359eb9c43204f.png" />
 </div>
 </div>
+<p>We these plots, we can see that the variables have a lot of outliers. This can be beacause of the missing values and the imputation with the IterativeImputer.
+We will keep these outliers for now.</p>
 </section>
 </section>
 </section>
