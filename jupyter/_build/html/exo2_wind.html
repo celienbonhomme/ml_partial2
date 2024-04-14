@@ -1,0 +1,1767 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Wind speed &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'exo2_wind';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Load data" href="exo3.html" />
+    <link rel="prev" title="Fraud detection" href="exo2_fraud.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fexo2_wind.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/exo2_wind.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Wind speed</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-preprocessed">Load data preprocessed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics">Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-time-sery">Plot time sery</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-week">Random week</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-and-regplot">Scatterplot and regplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation-of-data">Imputation of data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-imputation">Before imputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-imputation">After imputation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="wind-speed">
+<h1>Wind speed<a class="headerlink" href="#wind-speed" title="Link to this heading">#</a></h1>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_wind.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>HORA (UTC)</th>
+      <th>VENTO, DIREï¿½ï¿½O HORARIA (gr) (ï¿½ (gr))</th>
+      <th>VENTO, VELOCIDADE HORARIA (m/s)</th>
+      <th>UMIDADE REL. MAX. NA HORA ANT. (AUT) (%)</th>
+      <th>UMIDADE REL. MIN. NA HORA ANT. (AUT) (%)</th>
+      <th>TEMPERATURA Mï¿½XIMA NA HORA ANT. (AUT) (ï¿½C)</th>
+      <th>TEMPERATURA Mï¿½NIMA NA HORA ANT. (AUT) (ï¿½C)</th>
+      <th>UMIDADE RELATIVA DO AR, HORARIA (%)</th>
+      <th>PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)</th>
+      <th>PRECIPITAï¿½ï¿½O TOTAL, HORï¿½RIO (mm)</th>
+      <th>VENTO, RAJADA MAXIMA (m/s)</th>
+      <th>PRESSï¿½O ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)</th>
+      <th>PRESSï¿½O ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12:00</td>
+      <td>0.809017</td>
+      <td>1.8</td>
+      <td>69.0</td>
+      <td>60.0</td>
+      <td>22.6</td>
+      <td>20.7</td>
+      <td>61.0</td>
+      <td>888.2</td>
+      <td>0.0</td>
+      <td>3.8</td>
+      <td>888.2</td>
+      <td>887.7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13:00</td>
+      <td>0.965926</td>
+      <td>2.7</td>
+      <td>62.0</td>
+      <td>55.0</td>
+      <td>24.2</td>
+      <td>22.5</td>
+      <td>55.0</td>
+      <td>888.4</td>
+      <td>0.0</td>
+      <td>4.7</td>
+      <td>888.4</td>
+      <td>888.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14:00</td>
+      <td>0.891007</td>
+      <td>2.0</td>
+      <td>56.0</td>
+      <td>50.0</td>
+      <td>25.5</td>
+      <td>24.3</td>
+      <td>51.0</td>
+      <td>888.1</td>
+      <td>0.0</td>
+      <td>4.9</td>
+      <td>888.4</td>
+      <td>888.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15:00</td>
+      <td>0.848048</td>
+      <td>2.5</td>
+      <td>52.0</td>
+      <td>44.0</td>
+      <td>27.4</td>
+      <td>25.0</td>
+      <td>44.0</td>
+      <td>887.4</td>
+      <td>0.0</td>
+      <td>5.8</td>
+      <td>888.1</td>
+      <td>887.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16:00</td>
+      <td>0.224951</td>
+      <td>2.4</td>
+      <td>50.0</td>
+      <td>43.0</td>
+      <td>27.1</td>
+      <td>25.5</td>
+      <td>46.0</td>
+      <td>886.5</td>
+      <td>0.0</td>
+      <td>5.8</td>
+      <td>887.4</td>
+      <td>886.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 87693 entries, 0 to 87692
+Data columns (total 13 columns):
+ #   Column                                                 Non-Null Count  Dtype  
+---  ------                                                 --------------  -----  
+ 0   HORA (UTC)                                             87693 non-null  object 
+ 1   VENTO, DIREï¿½ï¿½O HORARIA (gr) (ï¿½ (gr))             87693 non-null  float64
+ 2   VENTO, VELOCIDADE HORARIA (m/s)                        87693 non-null  float64
+ 3   UMIDADE REL. MAX. NA HORA ANT. (AUT) (%)               87693 non-null  float64
+ 4   UMIDADE REL. MIN. NA HORA ANT. (AUT) (%)               87693 non-null  float64
+ 5   TEMPERATURA Mï¿½XIMA NA HORA ANT. (AUT) (ï¿½C)         87693 non-null  float64
+ 6   TEMPERATURA Mï¿½NIMA NA HORA ANT. (AUT) (ï¿½C)         87693 non-null  float64
+ 7   UMIDADE RELATIVA DO AR, HORARIA (%)                    87693 non-null  float64
+ 8   PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)  87693 non-null  float64
+ 9   PRECIPITAï¿½ï¿½O TOTAL, HORï¿½RIO (mm)                 87693 non-null  float64
+ 10  VENTO, RAJADA MAXIMA (m/s)                             87693 non-null  float64
+ 11  PRESSï¿½O ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)      87693 non-null  float64
+ 12  PRESSï¿½O ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)     87693 non-null  float64
+dtypes: float64(12), object(1)
+memory usage: 8.7+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>We don’t have missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;HORA (UTC)&#39;, &#39;VENTO, DIREï¿½ï¿½O HORARIA (gr) (ï¿½ (gr))&#39;,
+       &#39;VENTO, VELOCIDADE HORARIA (m/s)&#39;,
+       &#39;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%)&#39;,
+       &#39;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%)&#39;,
+       &#39;TEMPERATURA Mï¿½XIMA NA HORA ANT. (AUT) (ï¿½C)&#39;,
+       &#39;TEMPERATURA Mï¿½NIMA NA HORA ANT. (AUT) (ï¿½C)&#39;,
+       &#39;UMIDADE RELATIVA DO AR, HORARIA (%)&#39;,
+       &#39;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)&#39;,
+       &#39;PRECIPITAï¿½ï¿½O TOTAL, HORï¿½RIO (mm)&#39;, &#39;VENTO, RAJADA MAXIMA (m/s)&#39;,
+       &#39;PRESSï¿½O ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)&#39;,
+       &#39;PRESSï¿½O ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind_preprocessed</span> <span class="o">=</span> <span class="n">df_wind</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We don’t have significative column names so we can rename them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Hora&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Dirección del viento horaria (gr)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Humedad rel. máx. hora anterior (AUT) (%)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Humedad rel. mín. hora anterior (AUT) (%)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Temperatura máx. hora anterior (AUT) (℃)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Temperatura mín. hora anterior (AUT) (℃)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Humedad relativa horaria (%)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Presión atmosférica a nivel de estación, horaria (mB)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Precipitación total por hora (mm)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Máxima ráfaga de viento (m/s)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Presión atmosférica máx. hora anterior (AUT) (mB)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Presión atmosférica mín. hora anterior (AUT) (mB)&#39;</span>
+<span class="p">]</span>
+
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df_wind</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">new_columns</span><span class="p">)),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Hora&#39;, &#39;Dirección del viento horaria (gr)&#39;,
+       &#39;Velocidad horario del viento (m/s)&#39;,
+       &#39;Humedad rel. máx. hora anterior (AUT) (%)&#39;,
+       &#39;Humedad rel. mín. hora anterior (AUT) (%)&#39;,
+       &#39;Temperatura máx. hora anterior (AUT) (℃)&#39;,
+       &#39;Temperatura mín. hora anterior (AUT) (℃)&#39;,
+       &#39;Humedad relativa horaria (%)&#39;,
+       &#39;Presión atmosférica a nivel de estación, horaria (mB)&#39;,
+       &#39;Precipitación total por hora (mm)&#39;, &#39;Máxima ráfaga de viento (m/s)&#39;,
+       &#39;Presión atmosférica máx. hora anterior (AUT) (mB)&#39;,
+       &#39;Presión atmosférica mín. hora anterior (AUT) (mB)&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12:00
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some values are missing, sometimes we go from the hour 17 to 19 for exemple. We can add this missing hours to the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_added</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">23</span><span class="p">):</span>
+    <span class="n">hours</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">]</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb_added</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">hours</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cur_hour</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">next_hour</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">next_hour</span> <span class="o">!=</span> <span class="p">(</span><span class="n">cur_hour</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span><span class="p">:</span>
+            <span class="c1"># print(cur_hour, next_hour, f&quot;=&gt; add {str((cur_hour + 1) % 24)+&#39;:00&#39;}&quot;)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cur_hour</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">new_str</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">cur_hour</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;:00&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">((</span><span class="n">cur_hour</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;:00&quot;</span>
+            <span class="n">new_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Hora&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">new_str</span><span class="p">]})</span>
+            <span class="n">df_wind_preprocessed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">idx</span> <span class="o">+</span> <span class="n">nb_added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">new_row</span><span class="p">,</span> <span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">nb_added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">nb_added</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">nb_added</span><span class="si">}</span><span class="s2"> rows&quot;</span><span class="p">)</span>
+    <span class="n">total_added</span> <span class="o">+=</span> <span class="n">nb_added</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">total_added</span><span class="si">}</span><span class="s2"> en total&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 866 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 332 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 241 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 182 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 141 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 122 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 106 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 92 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 79 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 67 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 57 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 52 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 44 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 41 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 37 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 31 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 27 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 23 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 16 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 11 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 8 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 5 rows
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added 3 rows
+Added 2583 en total
+</pre></div>
+</div>
+</div>
+</div>
+<p>The hour is given as a string. Considered we have data for almost ten years, we can change the format of the hour, starting with a given year, for instance the year 2000.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][:</span><span class="mi">2</span><span class="p">]))</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_date</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">]))]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data are not in the units of the international system. We can change that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad rel. máx. hora anterior (AUT)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad rel. máx. hora anterior (AUT) (%)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Humedad rel. máx. hora anterior (AUT) (%)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad rel. mín. hora anterior (AUT)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad rel. mín. hora anterior (AUT) (%)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Humedad rel. mín. hora anterior (AUT) (%)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Temperatura máx. hora anterior (AUT) (K)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Temperatura máx. hora anterior (AUT) (℃)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperatura máx. hora anterior (AUT) (℃)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Temperatura mín. hora anterior (AUT) (K)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Temperatura mín. hora anterior (AUT) (℃)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperatura mín. hora anterior (AUT) (℃)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad relativa horaria&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Humedad relativa horaria (%)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Humedad relativa horaria (%)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica a nivel de estación, horaria (Pa)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica a nivel de estación, horaria (mB)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica a nivel de estación, horaria (mB)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Precipitación total por hora (m)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Precipitación total por hora (mm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Precipitación total por hora (mm)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica máx. hora anterior (AUT) (Pa)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica máx. hora anterior (AUT) (mB)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica máx. hora anterior (AUT) (mB)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica mín. hora anterior (AUT) (Pa)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_wind_preprocessed</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica mín. hora anterior (AUT) (mB)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Presión atmosférica mín. hora anterior (AUT) (mB)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Hora&#39;, &#39;Dirección del viento horaria (gr)&#39;,
+       &#39;Velocidad horario del viento (m/s)&#39;, &#39;Máxima ráfaga de viento (m/s)&#39;,
+       &#39;Fecha&#39;, &#39;Humedad rel. máx. hora anterior (AUT)&#39;,
+       &#39;Humedad rel. mín. hora anterior (AUT)&#39;,
+       &#39;Temperatura máx. hora anterior (AUT) (K)&#39;,
+       &#39;Temperatura mín. hora anterior (AUT) (K)&#39;, &#39;Humedad relativa horaria&#39;,
+       &#39;Presión atmosférica a nivel de estación, horaria (Pa)&#39;,
+       &#39;Precipitación total por hora (m)&#39;,
+       &#39;Presión atmosférica máx. hora anterior (AUT) (Pa)&#39;,
+       &#39;Presión atmosférica mín. hora anterior (AUT) (Pa)&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Dirección del viento horaria (gr)</th>
+      <th>Velocidad horario del viento (m/s)</th>
+      <th>Máxima ráfaga de viento (m/s)</th>
+      <th>Fecha</th>
+      <th>Humedad rel. máx. hora anterior (AUT)</th>
+      <th>Humedad rel. mín. hora anterior (AUT)</th>
+      <th>Temperatura máx. hora anterior (AUT) (K)</th>
+      <th>Temperatura mín. hora anterior (AUT) (K)</th>
+      <th>Humedad relativa horaria</th>
+      <th>Presión atmosférica a nivel de estación, horaria (Pa)</th>
+      <th>Precipitación total por hora (m)</th>
+      <th>Presión atmosférica máx. hora anterior (AUT) (Pa)</th>
+      <th>Presión atmosférica mín. hora anterior (AUT) (Pa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12</td>
+      <td>0.809017</td>
+      <td>1.8</td>
+      <td>3.8</td>
+      <td>2000-01-01 12:00:00</td>
+      <td>0.69</td>
+      <td>0.60</td>
+      <td>295.75</td>
+      <td>293.85</td>
+      <td>0.61</td>
+      <td>88820.0</td>
+      <td>0.0</td>
+      <td>88820.0</td>
+      <td>88770.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13</td>
+      <td>0.965926</td>
+      <td>2.7</td>
+      <td>4.7</td>
+      <td>2000-01-01 13:00:00</td>
+      <td>0.62</td>
+      <td>0.55</td>
+      <td>297.35</td>
+      <td>295.65</td>
+      <td>0.55</td>
+      <td>88840.0</td>
+      <td>0.0</td>
+      <td>88840.0</td>
+      <td>88820.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14</td>
+      <td>0.891007</td>
+      <td>2.0</td>
+      <td>4.9</td>
+      <td>2000-01-01 14:00:00</td>
+      <td>0.56</td>
+      <td>0.50</td>
+      <td>298.65</td>
+      <td>297.45</td>
+      <td>0.51</td>
+      <td>88810.0</td>
+      <td>0.0</td>
+      <td>88840.0</td>
+      <td>88810.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>0.848048</td>
+      <td>2.5</td>
+      <td>5.8</td>
+      <td>2000-01-01 15:00:00</td>
+      <td>0.52</td>
+      <td>0.44</td>
+      <td>300.55</td>
+      <td>298.15</td>
+      <td>0.44</td>
+      <td>88740.0</td>
+      <td>0.0</td>
+      <td>88810.0</td>
+      <td>88740.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>0.224951</td>
+      <td>2.4</td>
+      <td>5.8</td>
+      <td>2000-01-01 16:00:00</td>
+      <td>0.50</td>
+      <td>0.43</td>
+      <td>300.25</td>
+      <td>298.65</td>
+      <td>0.46</td>
+      <td>88650.0</td>
+      <td>0.0</td>
+      <td>88740.0</td>
+      <td>88650.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind_preprocessed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_wind_preprocessed.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data-preprocessed">
+<h2>Load data preprocessed<a class="headerlink" href="#load-data-preprocessed" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data_wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/data_wind_preprocessed.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="eda">
+<h2>EDA<a class="headerlink" href="#eda" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_eda</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Hora&#39;</span><span class="p">,</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
+<span class="n">data_eda</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(90276, 12)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="missing-values">
+<h3>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_data_count</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing_data_percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">missing_data_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_wind</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">missing_data_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Missing data (count)&#39;</span><span class="p">:</span> <span class="n">missing_data_count</span><span class="p">,</span>
+    <span class="s1">&#39;Missing data (%)&#39;</span><span class="p">:</span> <span class="n">missing_data_percentage</span>
+<span class="p">})</span>
+
+<span class="n">missing_data_stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing data (count)</th>
+      <th>Missing data (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Hora</th>
+      <td>0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>Dirección del viento horaria (gr)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Velocidad horario del viento (m/s)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Máxima ráfaga de viento (m/s)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Fecha</th>
+      <td>0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>Humedad rel. máx. hora anterior (AUT)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Humedad rel. mín. hora anterior (AUT)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Temperatura máx. hora anterior (AUT) (K)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Temperatura mín. hora anterior (AUT) (K)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Humedad relativa horaria</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Presión atmosférica a nivel de estación, horaria (Pa)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Precipitación total por hora (m)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Presión atmosférica máx. hora anterior (AUT) (Pa)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>Presión atmosférica mín. hora anterior (AUT) (Pa)</th>
+      <td>2583</td>
+      <td>2.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="statistics">
+<h3>Statistics<a class="headerlink" href="#statistics" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_wind</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Dirección del viento horaria (gr)</th>
+      <th>Velocidad horario del viento (m/s)</th>
+      <th>Máxima ráfaga de viento (m/s)</th>
+      <th>Humedad rel. máx. hora anterior (AUT)</th>
+      <th>Humedad rel. mín. hora anterior (AUT)</th>
+      <th>Temperatura máx. hora anterior (AUT) (K)</th>
+      <th>Temperatura mín. hora anterior (AUT) (K)</th>
+      <th>Humedad relativa horaria</th>
+      <th>Presión atmosférica a nivel de estación, horaria (Pa)</th>
+      <th>Precipitación total por hora (m)</th>
+      <th>Presión atmosférica máx. hora anterior (AUT) (Pa)</th>
+      <th>Presión atmosférica mín. hora anterior (AUT) (Pa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>90276.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+      <td>87693.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>11.500798</td>
+      <td>0.405810</td>
+      <td>2.466192</td>
+      <td>5.161076</td>
+      <td>0.690585</td>
+      <td>0.631762</td>
+      <td>295.071264</td>
+      <td>293.834570</td>
+      <td>0.661467</td>
+      <td>88725.192547</td>
+      <td>0.000161</td>
+      <td>88758.072366</td>
+      <td>88689.109279</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.922225</td>
+      <td>0.686247</td>
+      <td>1.313968</td>
+      <td>2.311157</td>
+      <td>0.196402</td>
+      <td>0.201663</td>
+      <td>3.721386</td>
+      <td>3.513744</td>
+      <td>0.199923</td>
+      <td>401.240375</td>
+      <td>0.001308</td>
+      <td>364.675005</td>
+      <td>356.453928</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>-1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.120000</td>
+      <td>0.100000</td>
+      <td>282.350000</td>
+      <td>281.550000</td>
+      <td>0.100000</td>
+      <td>86340.000000</td>
+      <td>0.000000</td>
+      <td>86530.000000</td>
+      <td>86280.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>6.000000</td>
+      <td>-0.156434</td>
+      <td>1.500000</td>
+      <td>3.400000</td>
+      <td>0.540000</td>
+      <td>0.480000</td>
+      <td>292.350000</td>
+      <td>291.550000</td>
+      <td>0.510000</td>
+      <td>88530.000000</td>
+      <td>0.000000</td>
+      <td>88560.000000</td>
+      <td>88500.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>12.000000</td>
+      <td>0.788011</td>
+      <td>2.400000</td>
+      <td>5.000000</td>
+      <td>0.720000</td>
+      <td>0.640000</td>
+      <td>294.550000</td>
+      <td>293.350000</td>
+      <td>0.680000</td>
+      <td>88720.000000</td>
+      <td>0.000000</td>
+      <td>88750.000000</td>
+      <td>88690.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>18.000000</td>
+      <td>0.970296</td>
+      <td>3.400000</td>
+      <td>6.800000</td>
+      <td>0.870000</td>
+      <td>0.800000</td>
+      <td>297.850000</td>
+      <td>296.250000</td>
+      <td>0.840000</td>
+      <td>88910.000000</td>
+      <td>0.000000</td>
+      <td>88930.000000</td>
+      <td>88880.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>23.000000</td>
+      <td>1.000000</td>
+      <td>10.000000</td>
+      <td>24.300000</td>
+      <td>1.000000</td>
+      <td>0.980000</td>
+      <td>308.450000</td>
+      <td>307.550000</td>
+      <td>0.990000</td>
+      <td>102350.000000</td>
+      <td>0.070800</td>
+      <td>91310.000000</td>
+      <td>91090.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="plot-time-sery">
+<h3>Plot time sery<a class="headerlink" href="#plot-time-sery" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data_wind</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">data_wind</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="p">))</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1"> over time&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> 
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;plotly&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="random-week">
+<h4>Random week<a class="headerlink" href="#random-week" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">seed</span>
+<span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">))</span>
+<span class="n">nb_values</span> <span class="o">=</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span>
+
+<span class="n">rdm_idx</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nb_values</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_wind</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">][</span><span class="n">rdm_idx</span><span class="p">:</span><span class="n">rdm_idx</span><span class="o">+</span><span class="n">nb_values</span><span class="p">],</span> <span class="n">data_eda</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">rdm_idx</span><span class="p">:</span><span class="n">rdm_idx</span><span class="o">+</span><span class="n">nb_values</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4a75d3c0bf83011909f1e3c505b91068eb3e9cab4c7d1a636857053c564bc8f4.png" src="_images/4a75d3c0bf83011909f1e3c505b91068eb3e9cab4c7d1a636857053c564bc8f4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="boxplot">
+<h3>Boxplot<a class="headerlink" href="#boxplot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_eda</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>])
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>].set_title(column)
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/19992fb4898d32c5e1b6dd2d3336943e89f65df9420bcdee41a23a64d1e10cc2.png" src="_images/19992fb4898d32c5e1b6dd2d3336943e89f65df9420bcdee41a23a64d1e10cc2.png" />
+</div>
+</div>
+</section>
+<section id="scatterplot-and-regplot">
+<h3>Scatterplot and regplot<a class="headerlink" href="#scatterplot-and-regplot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_eda</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Velocidad horario del viento (m/s)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>])
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>].set_title(column)
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8e5ac697933f7cba76c40bf625f3c1b83ecfb6c929c5192d6a448441746b0903.png" src="_images/8e5ac697933f7cba76c40bf625f3c1b83ecfb6c929c5192d6a448441746b0903.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="imputation-of-data">
+<h2>Imputation of data<a class="headerlink" href="#imputation-of-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">data_wind_imputed</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">data_wind_imputed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_wind_imputed.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="before-imputation">
+<h3>Before imputation<a class="headerlink" href="#before-imputation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_wind</span><span class="p">[</span><span class="mi">317</span><span class="p">:</span><span class="mi">320</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Dirección del viento horaria (gr)</th>
+      <th>Velocidad horario del viento (m/s)</th>
+      <th>Máxima ráfaga de viento (m/s)</th>
+      <th>Fecha</th>
+      <th>Humedad rel. máx. hora anterior (AUT)</th>
+      <th>Humedad rel. mín. hora anterior (AUT)</th>
+      <th>Temperatura máx. hora anterior (AUT) (K)</th>
+      <th>Temperatura mín. hora anterior (AUT) (K)</th>
+      <th>Humedad relativa horaria</th>
+      <th>Presión atmosférica a nivel de estación, horaria (Pa)</th>
+      <th>Precipitación total por hora (m)</th>
+      <th>Presión atmosférica máx. hora anterior (AUT) (Pa)</th>
+      <th>Presión atmosférica mín. hora anterior (AUT) (Pa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>317</th>
+      <td>17</td>
+      <td>0.838671</td>
+      <td>2.9</td>
+      <td>6.4</td>
+      <td>2000-01-14 17:00:00</td>
+      <td>0.54</td>
+      <td>0.48</td>
+      <td>298.85</td>
+      <td>297.35</td>
+      <td>0.49</td>
+      <td>89000.0</td>
+      <td>0.0</td>
+      <td>89050.0</td>
+      <td>89000.0</td>
+    </tr>
+    <tr>
+      <th>318</th>
+      <td>18</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2000-01-14 18:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>319</th>
+      <td>19</td>
+      <td>0.766044</td>
+      <td>2.7</td>
+      <td>6.1</td>
+      <td>2000-01-14 19:00:00</td>
+      <td>0.51</td>
+      <td>0.45</td>
+      <td>299.15</td>
+      <td>298.05</td>
+      <td>0.47</td>
+      <td>88950.0</td>
+      <td>0.0</td>
+      <td>88960.0</td>
+      <td>88940.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="after-imputation">
+<h3>After imputation<a class="headerlink" href="#after-imputation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_wind_imputed</span><span class="p">[</span><span class="mi">317</span><span class="p">:</span><span class="mi">320</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hora</th>
+      <th>Dirección del viento horaria (gr)</th>
+      <th>Velocidad horario del viento (m/s)</th>
+      <th>Máxima ráfaga de viento (m/s)</th>
+      <th>Fecha</th>
+      <th>Humedad rel. máx. hora anterior (AUT)</th>
+      <th>Humedad rel. mín. hora anterior (AUT)</th>
+      <th>Temperatura máx. hora anterior (AUT) (K)</th>
+      <th>Temperatura mín. hora anterior (AUT) (K)</th>
+      <th>Humedad relativa horaria</th>
+      <th>Presión atmosférica a nivel de estación, horaria (Pa)</th>
+      <th>Precipitación total por hora (m)</th>
+      <th>Presión atmosférica máx. hora anterior (AUT) (Pa)</th>
+      <th>Presión atmosférica mín. hora anterior (AUT) (Pa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>317</th>
+      <td>17</td>
+      <td>0.838671</td>
+      <td>2.9</td>
+      <td>6.40</td>
+      <td>2000-01-14 17:00:00</td>
+      <td>0.540</td>
+      <td>0.480</td>
+      <td>298.85</td>
+      <td>297.35</td>
+      <td>0.49</td>
+      <td>89000.0</td>
+      <td>0.0</td>
+      <td>89050.0</td>
+      <td>89000.0</td>
+    </tr>
+    <tr>
+      <th>318</th>
+      <td>18</td>
+      <td>0.802358</td>
+      <td>2.8</td>
+      <td>6.25</td>
+      <td>2000-01-14 18:00:00</td>
+      <td>0.525</td>
+      <td>0.465</td>
+      <td>299.00</td>
+      <td>297.70</td>
+      <td>0.48</td>
+      <td>88975.0</td>
+      <td>0.0</td>
+      <td>89005.0</td>
+      <td>88970.0</td>
+    </tr>
+    <tr>
+      <th>319</th>
+      <td>19</td>
+      <td>0.766044</td>
+      <td>2.7</td>
+      <td>6.10</td>
+      <td>2000-01-14 19:00:00</td>
+      <td>0.510</td>
+      <td>0.450</td>
+      <td>299.15</td>
+      <td>298.05</td>
+      <td>0.47</td>
+      <td>88950.0</td>
+      <td>0.0</td>
+      <td>88960.0</td>
+      <td>88940.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exo2_fraud.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Fraud detection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exo3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Load data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-preprocessed">Load data preprocessed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics">Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-time-sery">Plot time sery</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-week">Random week</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-and-regplot">Scatterplot and regplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation-of-data">Imputation of data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-imputation">Before imputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-imputation">After imputation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

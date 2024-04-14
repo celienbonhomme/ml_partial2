@@ -1,0 +1,67 @@
+Traceback (most recent call last):
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/leonardovaia/miniconda3/envs/ml_venv/lib/python3.9/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from sklearn.model_selection import GridSearchCV
+from utils import grid_search_by_hand, model_evaluation_clf
+from copy import deepcopy
+
+import warnings
+warnings.filterwarnings("ignore")
+
+results_gs = pd.DataFrame(columns=["Model", "Accuracy", "Precision", "Recall", "f1-score", "AUC"])
+results_hand = pd.DataFrame(columns=["Model", "Accuracy", "Precision", "Recall", "f1-score", "AUC"])
+models_gs_sc = {}
+models_gs = {}
+
+for i, (model_name, model, grid) in enumerate(zip(models_name, models, grids)):
+    gs_sc = GridSearchCV(model, param_grid=grid, scoring='recall', cv=cv, n_jobs=-1)
+    gs = GridSearchCV(model, param_grid=grid, scoring='recall', cv=cv, n_jobs=-1)
+    hand_sc = grid_search_by_hand(deepcopy(model), grid, X_train_sc, y_train, cv, 'recall')
+    hand = grid_search_by_hand(deepcopy(model), grid, X_train, y_train, cv, 'recall')
+
+    gs_sc.fit(X_train_sc, y_train)
+    gs.fit(X_train, y_train)
+    models_gs[model_name] = gs
+    models_gs_sc[model_name + ' (sc)'] = gs_sc
+    hand_sc['best_model'].fit(X_train_sc, y_train)
+    hand['best_model'].fit(X_train, y_train)
+
+    eval_gs_sc = model_evaluation_clf(gs_sc, X_test_sc, y_test)
+    eval_gs = model_evaluation_clf(gs, X_test, y_test)
+    eval_hand_sc = model_evaluation_clf(hand_sc['best_model'], X_test_sc, y_test)
+    eval_hand = model_evaluation_clf(hand['best_model'], X_test, y_test)
+
+    results_gs.loc[2*i] = [model_name, eval_gs['accuracy'], eval_gs['precision'], eval_gs['recall'], eval_gs['f1'], eval_gs['roc_auc']]
+    results_gs.loc[2*i+1] = [model_name + ' (sc)', eval_gs_sc['accuracy'], eval_gs_sc['precision'], eval_gs_sc['recall'], eval_gs_sc['f1'], eval_gs_sc['roc_auc']]
+    results_hand.loc[2*i] = [model_name, eval_hand['accuracy'], eval_hand['precision'], eval_hand['recall'], eval_hand['f1'], eval_hand['roc_auc']]
+    results_hand.loc[2*i+1] = [model_name + ' (sc)', eval_hand_sc['accuracy'], eval_hand_sc['precision'], eval_hand_sc['recall'], eval_hand_sc['f1'], eval_hand_sc['roc_auc']]
+
+results_gs = results_gs.sort_values(by='Recall', ascending=False)
+results_hand = results_hand.sort_values(by='Recall', ascending=False)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[6], line 2[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodel_selection[39;00m [38;5;28;01mimport[39;00m GridSearchCV
+[0;32m----> 2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m grid_search_by_hand, model_evaluation_clf
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcopy[39;00m [38;5;28;01mimport[39;00m deepcopy
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mwarnings[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'utils'
+

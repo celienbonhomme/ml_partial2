@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: exo1_cancer
+- file: exo1_housing
+- file: exo2_fraud
+- file: exo2_wind
+- file: exo3
+- file: exo4
