@@ -1,0 +1,1827 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fraud detection &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'exo2_fraud';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Wind speed" href="exo2_wind.html" />
+    <link rel="prev" title="Boston Housing" href="exo1_housing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fexo2_fraud.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/exo2_fraud.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fraud detection</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-encoded-data">Load encoded data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation-of-data">Imputation of data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-multicolinearity-with-vif-on-a-sample">Delete multicolinearity with VIF on a sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histplot">Histplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fraud-detection">
+<h1>Fraud detection<a class="headerlink" href="#fraud-detection" title="Link to this heading">#</a></h1>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="c1"># train_identity = pd.read_csv(&#39;../data/train_identity.csv&#39;)</span>
+<span class="c1"># train_transaction = pd.read_csv(&#39;../data/train_transaction.csv&#39;)</span>
+
+<span class="c1"># df_fraud = pd.merge(train_transaction, train_identity, on=&#39;TransactionID&#39;, how=&#39;left&#39;)</span>
+<span class="c1"># df_fraud.to_csv(&#39;../data/data_fraud.csv&#39;, index=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="eda">
+<h2>EDA<a class="headerlink" href="#eda" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TransactionID</th>
+      <th>isFraud</th>
+      <th>TransactionDT</th>
+      <th>TransactionAmt</th>
+      <th>ProductCD</th>
+      <th>card1</th>
+      <th>card2</th>
+      <th>card3</th>
+      <th>card4</th>
+      <th>card5</th>
+      <th>...</th>
+      <th>id_31</th>
+      <th>id_32</th>
+      <th>id_33</th>
+      <th>id_34</th>
+      <th>id_35</th>
+      <th>id_36</th>
+      <th>id_37</th>
+      <th>id_38</th>
+      <th>DeviceType</th>
+      <th>DeviceInfo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2987000</td>
+      <td>0</td>
+      <td>86400</td>
+      <td>68.5</td>
+      <td>W</td>
+      <td>13926</td>
+      <td>NaN</td>
+      <td>150.0</td>
+      <td>discover</td>
+      <td>142.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2987001</td>
+      <td>0</td>
+      <td>86401</td>
+      <td>29.0</td>
+      <td>W</td>
+      <td>2755</td>
+      <td>404.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>102.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2987002</td>
+      <td>0</td>
+      <td>86469</td>
+      <td>59.0</td>
+      <td>W</td>
+      <td>4663</td>
+      <td>490.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>166.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2987003</td>
+      <td>0</td>
+      <td>86499</td>
+      <td>50.0</td>
+      <td>W</td>
+      <td>18132</td>
+      <td>567.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>117.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2987004</td>
+      <td>0</td>
+      <td>86506</td>
+      <td>50.0</td>
+      <td>H</td>
+      <td>4497</td>
+      <td>514.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>102.0</td>
+      <td>...</td>
+      <td>samsung browser 6.2</td>
+      <td>32.0</td>
+      <td>2220x1080</td>
+      <td>match_status:2</td>
+      <td>T</td>
+      <td>F</td>
+      <td>T</td>
+      <td>T</td>
+      <td>mobile</td>
+      <td>SAMSUNG SM-G892A Build/NRD90M</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2987005</td>
+      <td>0</td>
+      <td>86510</td>
+      <td>49.0</td>
+      <td>W</td>
+      <td>5937</td>
+      <td>555.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>226.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2987006</td>
+      <td>0</td>
+      <td>86522</td>
+      <td>159.0</td>
+      <td>W</td>
+      <td>12308</td>
+      <td>360.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>166.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2987007</td>
+      <td>0</td>
+      <td>86529</td>
+      <td>422.5</td>
+      <td>W</td>
+      <td>12695</td>
+      <td>490.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>226.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2987008</td>
+      <td>0</td>
+      <td>86535</td>
+      <td>15.0</td>
+      <td>H</td>
+      <td>2803</td>
+      <td>100.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>226.0</td>
+      <td>...</td>
+      <td>mobile safari 11.0</td>
+      <td>32.0</td>
+      <td>1334x750</td>
+      <td>match_status:1</td>
+      <td>T</td>
+      <td>F</td>
+      <td>F</td>
+      <td>T</td>
+      <td>mobile</td>
+      <td>iOS Device</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2987009</td>
+      <td>0</td>
+      <td>86536</td>
+      <td>117.0</td>
+      <td>W</td>
+      <td>17399</td>
+      <td>111.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>224.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 434 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(590540, 434)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 590540 entries, 0 to 590539
+Columns: 434 entries, TransactionID to DeviceInfo
+dtypes: float64(399), int64(4), object(31)
+memory usage: 1.9+ GB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>115523073
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have a lot of missing values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_data_count</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing_data_percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">missing_data_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_fraud</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">missing_data_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Missing data (count)&#39;</span><span class="p">:</span> <span class="n">missing_data_count</span><span class="p">,</span>
+    <span class="s1">&#39;Missing data (%)&#39;</span><span class="p">:</span> <span class="n">missing_data_percentage</span>
+<span class="p">})</span>
+
+<span class="n">missing_data_stats</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Missing data (%)&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing data (count)</th>
+      <th>Missing data (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>id_24</th>
+      <td>585793</td>
+      <td>99.2</td>
+    </tr>
+    <tr>
+      <th>id_25</th>
+      <td>585408</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_26</th>
+      <td>585377</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_21</th>
+      <td>585381</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_22</th>
+      <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_23</th>
+      <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_08</th>
+      <td>585385</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_07</th>
+      <td>585385</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_27</th>
+      <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>dist2</th>
+      <td>552913</td>
+      <td>93.6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+
+<span class="n">object_df</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span>
+
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">encoded_data</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">object_df</span><span class="p">)</span>
+
+<span class="n">categories</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">categories_</span>
+
+<span class="n">encoded_columns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">object_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">encoded_columns</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:]])</span>
+
+<span class="n">encoded_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">encoded_data</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoded_columns</span><span class="p">)</span>
+
+<span class="n">df_fraud</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">object_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_fraud</span><span class="p">,</span> <span class="n">encoded_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(590540, 2834)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">correlation</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V257    0.383060
+V246    0.366878
+V244    0.364129
+V242    0.360590
+V201    0.328005
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">thresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">correlation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">0.005</span><span class="p">)</span>
+<span class="n">nb_col2drop</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+    <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">[</span><span class="n">correlation</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">nb_col2drop</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_to_drop</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">thresholds</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">nb_col2drop</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines+markers&#39;</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number of columns to drop depending on the correlation threshold&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Threshold&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Number of columns to drop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_99798/376363404.py:5: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+</pre></div>
+</div>
+</div>
+</div>
+<p>But before that, let’s see the correlation between each variable and the output to be sure we are not eliminating a relevant variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">columns_to_drop</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">[</span><span class="n">correlation</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_filtered</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns_to_drop</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Columns dropped: </span><span class="si">{</span><span class="n">columns_to_drop</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Elimated columns: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_to_drop</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing values eliminated: </span><span class="si">{</span><span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df_fraud_filtered</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columns dropped: Index([&#39;V254&#39;, &#39;id_31_mobile safari generic&#39;, &#39;V117&#39;, &#39;V61&#39;, &#39;id_02&#39;, &#39;V3&#39;,
+       &#39;DeviceInfo_LG-D320 Build/KOT49I.V10a&#39;, &#39;DeviceInfo_Windows&#39;, &#39;V315&#39;,
+       &#39;V119&#39;,
+       ...
+       &#39;DeviceInfo_SM-A310M Build/LMY47X&#39;, &#39;DeviceInfo_VS995 Build/NRD90M&#39;,
+       &#39;V319&#39;, &#39;id_33_3000x2000&#39;, &#39;R_emaildomain_aol.com&#39;,
+       &#39;P_emaildomain_embarqmail.com&#39;, &#39;V136&#39;, &#39;id_31_chrome 51.0&#39;,
+       &#39;R_emaildomain_yahoo.es&#39;, &#39;P_emaildomain_yahoo.fr&#39;],
+      dtype=&#39;object&#39;, length=2618)
+
+Elimated columns: 2618
+Missing values eliminated: 55304710
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_filtered</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>isFraud</th>
+      <th>card3</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D4</th>
+      <th>D5</th>
+      <th>D6</th>
+      <th>D7</th>
+      <th>D8</th>
+      <th>D10</th>
+      <th>...</th>
+      <th>id_35_nan</th>
+      <th>id_36_nan</th>
+      <th>id_37_T</th>
+      <th>id_37_nan</th>
+      <th>id_38_nan</th>
+      <th>DeviceType_mobile</th>
+      <th>DeviceType_nan</th>
+      <th>DeviceInfo_SM-A300H Build/LRX22G</th>
+      <th>DeviceInfo_hi6210sft Build/MRA58K</th>
+      <th>DeviceInfo_nan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>150.0</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>150.0</td>
+      <td>112.0</td>
+      <td>112.0</td>
+      <td>94.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>84.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 216 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_filtered.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<section id="load-encoded-data">
+<h3>Load encoded data<a class="headerlink" href="#load-encoded-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_fraud_filtered</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_filtered.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_102066/703400563.py:1: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="imputation-of-data">
+<h3>Imputation of data<a class="headerlink" href="#imputation-of-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.experimental</span> <span class="kn">import</span> <span class="n">enable_iterative_imputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">IterativeImputer</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">IterativeImputer</span><span class="p">(</span><span class="n">n_nearest_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">imputer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_fraud_filtered</span><span class="p">)</span>
+<span class="n">df_fraud_imputed</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_fraud_filtered</span><span class="p">)</span>
+<span class="n">df_fraud_imputed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_fraud_imputed</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_fraud_filtered</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_imputed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_imputed.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="delete-multicolinearity-with-vif-on-a-sample">
+<h3>Delete multicolinearity with VIF on a sample<a class="headerlink" href="#delete-multicolinearity-with-vif-on-a-sample" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_fraud_imputed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_imputed.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size_sample</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">df_sampled</span> <span class="o">=</span> <span class="n">df_fraud_imputed</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">size_sample</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">delete_multicollinearity</span>
+
+<span class="n">df_fraud_preprocessed</span> <span class="o">=</span> <span class="n">delete_multicollinearity</span><span class="p">(</span><span class="n">df_sampled</span><span class="p">,</span> <span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dropped column M9_nan with VIF: inf (29s)
+Dropped column M8_nan with VIF: inf (30s)
+Dropped column M2_nan with VIF: inf (35s)
+Dropped column M1_nan with VIF: inf (32s)
+Dropped column id_35_nan with VIF: inf (25s)
+Dropped column id_38_nan with VIF: inf (27s)
+Dropped column id_28_nan with VIF: inf (24s)
+Dropped column id_37_nan with VIF: inf (27s)
+Dropped column id_36_nan with VIF: inf (28s)
+Dropped column id_29_nan with VIF: inf (29s)
+Dropped column DeviceType_nan with VIF: 5483.9 (36s)
+Dropped column D7 with VIF: 3236.4 (31s)
+Dropped column id_26 with VIF: 2957.3 (32s)
+Dropped column id_22 with VIF: 2880.8 (24s)
+Dropped column V249 with VIF: 2812.6 (24s)
+Dropped column id_32 with VIF: 2422.9 (26s)
+Dropped column V111 with VIF: 2049.6 (24s)
+Dropped column V197 with VIF: 2009.0 (25s)
+Dropped column V190 with VIF: 1682.7 (21s)
+Dropped column M1_T with VIF: 1633.6 (28s)
+Dropped column V108 with VIF: 1526.7 (26s)
+Dropped column id_15_nan with VIF: 1463.0 (23s)
+Dropped column V148 with VIF: 1450.0 (26s)
+Dropped column V186 with VIF: 1228.1 (26s)
+Dropped column V194 with VIF: 1210.3 (28s)
+Dropped column id_18 with VIF: 1146.8 (21s)
+Dropped column V247 with VIF: 1094.5 (22s)
+Dropped column id_17 with VIF: 973.3 (18s)
+Dropped column V113 with VIF: 747.0 (18s)
+Dropped column V188 with VIF: 627.3 (19s)
+Dropped column V155 with VIF: 602.3 (17s)
+Dropped column V17 with VIF: 571.7 (18s)
+Dropped column V110 with VIF: 545.2 (17s)
+Dropped column V195 with VIF: 505.2 (21s)
+Dropped column V114 with VIF: 474.1 (16s)
+Dropped column R_emaildomain_nan with VIF: 473.4 (16s)
+Dropped column id_12_nan with VIF: 455.3 (16s)
+Dropped column V244 with VIF: 451.4 (17s)
+Dropped column card6_debit with VIF: 443.7 (16s)
+Dropped column V154 with VIF: 435.7 (16s)
+Dropped column V198 with VIF: 416.6 (16s)
+Dropped column id_21 with VIF: 411.8 (16s)
+Dropped column V243 with VIF: 366.1 (15s)
+Dropped column card3 with VIF: 352.5 (15s)
+Dropped column V150 with VIF: 333.7 (15s)
+Dropped column id_31_nan with VIF: 331.2 (14s)
+Dropped column V199 with VIF: 317.4 (14s)
+Dropped column V252 with VIF: 301.9 (14s)
+Dropped column V93 with VIF: 291.2 (13s)
+Dropped column ProductCD_W with VIF: 275.4 (13s)
+Dropped column V46 with VIF: 261.7 (13s)
+Dropped column V112 with VIF: 247.2 (13s)
+Dropped column V156 with VIF: 244.7 (13s)
+Dropped column V158 with VIF: 223.2 (15s)
+Dropped column V31 with VIF: 208.8 (15s)
+Dropped column V189 with VIF: 206.9 (13s)
+Dropped column V191 with VIF: 204.5 (12s)
+Dropped column V116 with VIF: 200.8 (13s)
+Dropped column V57 with VIF: 184.8 (12s)
+Dropped column V246 with VIF: 181.2 (12s)
+Dropped column id_08 with VIF: 178.7 (13s)
+Dropped column V245 with VIF: 172.4 (12s)
+Dropped column V42 with VIF: 160.8 (11s)
+Dropped column id_07 with VIF: 153.4 (11s)
+Dropped column V21 with VIF: 150.8 (13s)
+Dropped column V159 with VIF: 148.2 (15s)
+Dropped column V262 with VIF: 145.0 (13s)
+Dropped column V248 with VIF: 141.7 (13s)
+Dropped column V80 with VIF: 135.9 (16s)
+Dropped column V86 with VIF: 134.9 (15s)
+Dropped column V139 with VIF: 133.6 (14s)
+Dropped column V109 with VIF: 126.3 (14s)
+Dropped column V123 with VIF: 124.2 (12s)
+Dropped column id_16_nan with VIF: 116.5 (13s)
+Dropped column V153 with VIF: 111.3 (14s)
+Dropped column V242 with VIF: 104.9 (13s)
+Dropped column V221 with VIF: 100.2 (12s)
+Dropped column V23 with VIF: 99.3 (10s)
+Dropped column V50 with VIF: 97.4 (8s)
+Dropped column V63 with VIF: 88.8 (8s)
+Dropped column V230 with VIF: 88.4 (7s)
+Dropped column V37 with VIF: 80.7 (8s)
+Dropped column V58 with VIF: 79.4 (10s)
+Dropped column V145 with VIF: 78.6 (7s)
+Dropped column V239 with VIF: 76.3 (7s)
+Dropped column id_14 with VIF: 75.5 (7s)
+Dropped column V201 with VIF: 74.9 (9s)
+Dropped column V10 with VIF: 73.5 (8s)
+Dropped column V257 with VIF: 72.3 (8s)
+Dropped column V51 with VIF: 68.4 (8s)
+Dropped column V60 with VIF: 66.6 (8s)
+Dropped column V170 with VIF: 65.7 (8s)
+Dropped column V16 with VIF: 65.1 (8s)
+Dropped column V47 with VIF: 64.0 (7s)
+Dropped column V125 with VIF: 62.4 (7s)
+Dropped column V85 with VIF: 61.8 (14s)
+Dropped column V90 with VIF: 61.5 (19s)
+Dropped column V115 with VIF: 58.3 (15s)
+Dropped column V151 with VIF: 57.0 (5s)
+Dropped column V33 with VIF: 56.1 (6s)
+Dropped column V256 with VIF: 52.9 (6s)
+Dropped column V304 with VIF: 50.4 (6s)
+Dropped column V77 with VIF: 49.0 (5s)
+Dropped column V71 with VIF: 48.5 (5s)
+Dropped column V92 with VIF: 45.6 (5s)
+Dropped column V39 with VIF: 41.4 (5s)
+Dropped column V29 with VIF: 40.1 (5s)
+Dropped column V18 with VIF: 39.6 (4s)
+Dropped column V149 with VIF: 39.4 (4s)
+Dropped column V83 with VIF: 38.8 (4s)
+Dropped column V49 with VIF: 38.7 (4s)
+Dropped column V260 with VIF: 38.5 (5s)
+Dropped column V44 with VIF: 37.3 (4s)
+Dropped column V24 with VIF: 37.2 (3s)
+Dropped column V147 with VIF: 34.5 (3s)
+Dropped column V94 with VIF: 34.3 (3s)
+Dropped column V55 with VIF: 33.1 (4s)
+Dropped column V67 with VIF: 32.2 (4s)
+Dropped column V15 with VIF: 31.8 (4s)
+Dropped column V228 with VIF: 29.2 (3s)
+Dropped column V69 with VIF: 28.9 (3s)
+Dropped column V87 with VIF: 28.3 (3s)
+Dropped column V84 with VIF: 28.2 (3s)
+Dropped column V251 with VIF: 28.1 (2s)
+Dropped column id_20 with VIF: 26.6 (2s)
+Dropped column V171 with VIF: 25.8 (2s)
+Dropped column V59 with VIF: 25.0 (2s)
+Dropped column V259 with VIF: 24.9 (2s)
+Dropped column V74 with VIF: 24.8 (2s)
+Dropped column DeviceInfo_nan with VIF: 23.8 (2s)
+Dropped column V43 with VIF: 23.3 (3s)
+Dropped column V22 with VIF: 22.3 (2s)
+Dropped column V157 with VIF: 21.8 (2s)
+Dropped column V79 with VIF: 20.3 (2s)
+Dropped column V45 with VIF: 19.6 (2s)
+Dropped column V302 with VIF: 18.7 (2s)
+Dropped column V32 with VIF: 18.6 (2s)
+Dropped column V91 with VIF: 18.1 (1s)
+Dropped column V152 with VIF: 18.0 (1s)
+Dropped column M2_T with VIF: 17.3 (1s)
+Dropped column V232 with VIF: 17.1 (1s)
+Dropped column V52 with VIF: 17.0 (1s)
+Dropped column V36 with VIF: 16.3 (1s)
+Dropped column V11 with VIF: 15.8 (1s)
+Dropped column V38 with VIF: 14.5 (1s)
+Dropped column D2 with VIF: 14.3 (1s)
+Dropped column V72 with VIF: 14.1 (1s)
+Dropped column V48 with VIF: 14.0 (1s)
+Dropped column V81 with VIF: 13.4 (1s)
+Dropped column V141 with VIF: 13.2 (1s)
+Dropped column V176 with VIF: 12.7 (1s)
+Dropped column M7_nan with VIF: 12.5 (1s)
+Dropped column V261 with VIF: 11.1 (1s)
+Dropped column V140 with VIF: 10.7 (1s)
+Dropped column V160 with VIF: 10.4 (1s)
+Dropped column V124 with VIF: 10.2 (1s)
+Dropped column M4_nan with VIF: 10.2 (0s)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns_to_keep</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_fraud_preprocessed</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span>
+<span class="n">df_fraud_final</span> <span class="o">=</span> <span class="n">df_fraud_imputed</span><span class="p">[</span><span class="n">columns_to_keep</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_final</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(590540, 59)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">df_fraud_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df_fraud_final</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">correlation</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V200    0.219812
+V258    0.201618
+V73     0.172292
+V146    0.171017
+V34     0.168216
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_final</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_final.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_fraud_preprocessed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_final.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_106155/2919787292.py:1: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud_preprocessed</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;D1&#39;, &#39;D4&#39;, &#39;D5&#39;, &#39;D6&#39;, &#39;D8&#39;, &#39;D10&#39;, &#39;D13&#39;, &#39;D15&#39;, &#39;V12&#39;, &#39;V30&#39;, &#39;V34&#39;,
+       &#39;V35&#39;, &#39;V40&#39;, &#39;V56&#39;, &#39;V62&#39;, &#39;V64&#39;, &#39;V70&#39;, &#39;V73&#39;, &#39;V75&#39;, &#39;V78&#39;, &#39;V82&#39;,
+       &#39;V142&#39;, &#39;V144&#39;, &#39;V146&#39;, &#39;V162&#39;, &#39;V165&#39;, &#39;V169&#39;, &#39;V184&#39;, &#39;V185&#39;, &#39;V200&#39;,
+       &#39;V220&#39;, &#39;V222&#39;, &#39;V229&#39;, &#39;V235&#39;, &#39;V238&#39;, &#39;V258&#39;, &#39;V281&#39;, &#39;V282&#39;, &#39;V283&#39;,
+       &#39;V303&#39;, &#39;id_01&#39;, &#39;id_04&#39;, &#39;card6_credit&#39;, &#39;R_emaildomain_gmail.com&#39;,
+       &#39;R_emaildomain_hotmail.com&#39;, &#39;M3_T&#39;, &#39;M3_nan&#39;, &#39;M4_M2&#39;, &#39;M6_T&#39;,
+       &#39;M6_nan&#39;, &#39;M9_T&#39;, &#39;id_12_NotFound&#39;, &#39;id_31_chrome 64.0 for android&#39;,
+       &#39;id_31_chrome generic&#39;, &#39;id_37_T&#39;, &#39;DeviceType_mobile&#39;,
+       &#39;DeviceInfo_SM-A300H Build/LRX22G&#39;, &#39;DeviceInfo_hi6210sft Build/MRA58K&#39;,
+       &#39;isFraud&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">col_eda</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;D10&#39;</span><span class="p">,</span> <span class="s1">&#39;V12&#39;</span><span class="p">,</span> <span class="s1">&#39;V34&#39;</span><span class="p">,</span> <span class="s1">&#39;V56&#39;</span><span class="p">,</span> <span class="s1">&#39;V70&#39;</span><span class="p">,</span> <span class="s1">&#39;V142&#39;</span><span class="p">,</span> <span class="s1">&#39;V185&#39;</span><span class="p">,</span> <span class="s1">&#39;V222&#39;</span><span class="p">,</span> <span class="s1">&#39;V303&#39;</span><span class="p">]</span>
+<span class="n">data_eda</span> <span class="o">=</span> <span class="n">df_fraud_preprocessed</span><span class="p">[</span><span class="n">col_eda</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_eda</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D1</th>
+      <th>D10</th>
+      <th>V12</th>
+      <th>V34</th>
+      <th>V56</th>
+      <th>V70</th>
+      <th>V142</th>
+      <th>V185</th>
+      <th>V222</th>
+      <th>V303</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+      <td>590540.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>94.301743</td>
+      <td>114.352936</td>
+      <td>0.492291</td>
+      <td>0.190198</td>
+      <td>1.150817</td>
+      <td>0.390706</td>
+      <td>0.010791</td>
+      <td>-0.037418</td>
+      <td>1.270398</td>
+      <td>0.283142</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>157.524195</td>
+      <td>172.379537</td>
+      <td>0.508327</td>
+      <td>0.368357</td>
+      <td>0.638586</td>
+      <td>0.520211</td>
+      <td>0.124111</td>
+      <td>0.367969</td>
+      <td>1.471701</td>
+      <td>0.623605</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-115.084395</td>
+      <td>-151.869924</td>
+      <td>-0.440740</td>
+      <td>-0.497503</td>
+      <td>-0.082415</td>
+      <td>-0.200048</td>
+      <td>-1.089099</td>
+      <td>-3.051093</td>
+      <td>-0.529198</td>
+      <td>-0.000261</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>-0.008494</td>
+      <td>-0.129965</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.000000</td>
+      <td>38.000000</td>
+      <td>0.043055</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-0.082091</td>
+      <td>1.096201</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>122.000000</td>
+      <td>151.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.006050</td>
+      <td>0.000000</td>
+      <td>1.370180</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>640.000000</td>
+      <td>876.000000</td>
+      <td>3.000000</td>
+      <td>13.000000</td>
+      <td>51.000000</td>
+      <td>6.000000</td>
+      <td>9.000000</td>
+      <td>31.000000</td>
+      <td>384.000000</td>
+      <td>20.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="histplot">
+<h3>Histplot<a class="headerlink" href="#histplot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_eda</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Histogram of </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1ecc935a27592a450b8f5471838a6926f8dc71fb6816e4f241fda42fa7daee38.png" src="_images/1ecc935a27592a450b8f5471838a6926f8dc71fb6816e4f241fda42fa7daee38.png" />
+</div>
+</div>
+</section>
+<section id="boxplot">
+<h3>Boxplot<a class="headerlink" href="#boxplot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_eda</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data_eda</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot of </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9f4eb277600ec3e09fee845ddf77da6931fb3a5fd628dffe30c359eb9c43204f.png" src="_images/9f4eb277600ec3e09fee845ddf77da6931fb3a5fd628dffe30c359eb9c43204f.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exo1_housing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Boston Housing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exo2_wind.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Wind speed</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-encoded-data">Load encoded data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation-of-data">Imputation of data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-multicolinearity-with-vif-on-a-sample">Delete multicolinearity with VIF on a sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histplot">Histplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
