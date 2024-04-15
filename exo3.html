@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Load data &#8212; My sample book</title>
+    <title>Ejercicio 3 &#8212; My sample book</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Ejercicio 4" href="exo4.html" />
-    <link rel="prev" title="Wind speed" href="exo2_wind.html" />
+    <link rel="prev" title="Ejercicio 2: Wind speed" href="exo2_wind.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,11 +177,11 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Breast cancer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Boston Housing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Fraud detection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Wind speed</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Load data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Ejercicio 1: Breast cancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Ejercicio 1: Boston Housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Ejercicio 2: Fraud detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Ejercicio 2: Wind speed</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ejercicio 3</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="exo4.html">Ejercicio 4</a></li>
 </ul>
@@ -369,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Load data</h1>
+    <h1>Ejercicio 3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,7 +379,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ejercicio 3</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#without-hyperparametrization">Without hyperparametrization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with-hyperparametrization">With hyperparametrization</a></li>
@@ -397,25 +397,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="load-data">
-<h1>Load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ejercicio-3">
+<h1>Ejercicio 3<a class="headerlink" href="#ejercicio-3" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">data_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_final.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_544660/2029832554.py:1: DeprecationWarning: 
-Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
-(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
-but was not found to be installed on your system.
-If this would cause problems for you,
-please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
-        
-  import pandas as pd
 </pre></div>
 </div>
 </div>
@@ -691,11 +679,12 @@ Test dataset shape Counter({0.0: 113982, 1.0: 4126})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Naive Bayes =&gt; 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6s
-Training Decision Tree =&gt; 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Naive Bayes =&gt; 1.6s
+Training Decision Tree =&gt; 130.4s
+Training Random Forest =&gt; 3403.0s
+Training Gradient Boosting =&gt; 1057.6s
+Training K-NN =&gt; 0.5s
+Training Logistic Regression =&gt; 70.5s
 </pre></div>
 </div>
 </div>
@@ -1044,7 +1033,7 @@ Logistic Regression (Bayes)     0.850      0.141   0.651     0.232 0.754        
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Wind speed</p>
+        <p class="prev-next-title">Ejercicio 2: Wind speed</p>
       </div>
     </a>
     <a class="right-next"
@@ -1072,7 +1061,7 @@ Logistic Regression (Bayes)     0.850      0.141   0.651     0.232 0.754        
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ejercicio 3</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#without-hyperparametrization">Without hyperparametrization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with-hyperparametrization">With hyperparametrization</a></li>

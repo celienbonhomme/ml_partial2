@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'exo4';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Load data" href="exo3.html" />
+    <link rel="prev" title="Ejercicio 3" href="exo3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,11 +176,11 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Breast cancer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Boston Housing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Fraud detection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Wind speed</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exo3.html">Load data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Ejercicio 1: Breast cancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Ejercicio 1: Boston Housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Ejercicio 2: Fraud detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Ejercicio 2: Wind speed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3.html">Ejercicio 3</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ejercicio 4</a></li>
 </ul>
@@ -401,18 +401,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_545469/660668080.py:1: DeprecationWarning: 
-Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
-(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
-but was not found to be installed on your system.
-If this would cause problems for you,
-please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
-        
-  import pandas as pd
 </pre></div>
 </div>
 </div>
@@ -842,216 +830,34 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># Fit the BayesSearchCV object to find the best parameters</span>
-<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">model_dict</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;model_ready&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_cv</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="c1"># Store the best parameters for the current model</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/searchcv.py:538,</span> in <span class="ni">BayesSearchCV.fit</span><span class="nt">(self, X, y, groups, callback, **fit_params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refit</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">532</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span>         <span class="s2">&quot;BayesSearchCV doesn&#39;t support a callable refit, &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span>         <span class="s2">&quot;as it doesn&#39;t define an implicit score to &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span>         <span class="s2">&quot;optimize&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">538</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">540</span> <span class="c1"># BaseSearchCV never ranked train scores,</span>
-<span class="g g-Whitespace">    </span><span class="mi">541</span> <span class="c1"># but apparently we used to ship this (back-compat)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_train_score</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/base.py:1351,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1344</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1346</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1347</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span> <span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/model_selection/_search.py:970,</span> in <span class="ni">BaseSearchCV.fit</span><span class="nt">(self, X, y, **params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">964</span>     <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_results</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">965</span>         <span class="n">all_candidate_params</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">,</span> <span class="n">all_out</span><span class="p">,</span> <span class="n">all_more_results</span>
-<span class="g g-Whitespace">    </span><span class="mi">966</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">968</span>     <span class="k">return</span> <span class="n">results</span>
-<span class="ne">--&gt; </span><span class="mi">970</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_search</span><span class="p">(</span><span class="n">evaluate_candidates</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">972</span> <span class="c1"># multimetric is determined here because in the case of a callable</span>
-<span class="g g-Whitespace">    </span><span class="mi">973</span> <span class="c1"># self.scoring the return type is only known after calling</span>
-<span class="g g-Whitespace">    </span><span class="mi">974</span> <span class="n">first_test_score</span> <span class="o">=</span> <span class="n">all_out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;test_scores&quot;</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/searchcv.py:595,</span> in <span class="ni">BayesSearchCV._run_search</span><span class="nt">(self, evaluate_candidates)</span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span> <span class="k">while</span> <span class="n">n_iter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">592</span>     <span class="c1"># when n_iter &lt; n_points points left for evaluation</span>
-<span class="g g-Whitespace">    </span><span class="mi">593</span>     <span class="n">n_points_adjusted</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">595</span>     <span class="n">optim_result</span><span class="p">,</span> <span class="n">score_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">596</span>         <span class="n">search_space</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">597</span>         <span class="n">optimizer</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">598</span>         <span class="n">score_name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">599</span>         <span class="n">evaluate_candidates</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">600</span>         <span class="n">n_points</span><span class="o">=</span><span class="n">n_points_adjusted</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">601</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">602</span>     <span class="n">n_iter</span> <span class="o">-=</span> <span class="n">n_points</span>
-<span class="g g-Whitespace">    </span><span class="mi">604</span>     <span class="k">if</span> <span class="n">eval_callbacks</span><span class="p">(</span><span class="n">callbacks</span><span class="p">,</span> <span class="n">optim_result</span><span class="p">):</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/searchcv.py:441,</span> in <span class="ni">BayesSearchCV._step</span><span class="nt">(self, search_space, optimizer, score_name, evaluate_candidates, n_points)</span>
-<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Generate n_jobs parameters and evaluate them in parallel.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">440</span> <span class="c1"># get parameter values to evaluate</span>
-<span class="ne">--&gt; </span><span class="mi">441</span> <span class="n">params</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="n">n_points</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">443</span> <span class="c1"># convert parameters to python native types</span>
-<span class="g g-Whitespace">    </span><span class="mi">444</span> <span class="n">params</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/optimizer/optimizer.py:464,</span> in <span class="ni">Optimizer.ask</span><span class="nt">(self, n_points, strategy)</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span>         <span class="n">opt</span><span class="o">.</span><span class="n">_tell</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">y_lie</span><span class="p">,</span> <span class="n">t_lie</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">463</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">464</span>         <span class="n">opt</span><span class="o">.</span><span class="n">_tell</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_lie</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">466</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_</span> <span class="o">=</span> <span class="p">{(</span><span class="n">n_points</span><span class="p">,</span> <span class="n">strategy</span><span class="p">):</span> <span class="n">X</span><span class="p">}</span>  <span class="c1"># cache_ the result</span>
-<span class="g g-Whitespace">    </span><span class="mi">468</span> <span class="k">return</span> <span class="n">X</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/optimizer/optimizer.py:615,</span> in <span class="ni">Optimizer._tell</span><span class="nt">(self, x, y, fit)</span>
-<span class="g g-Whitespace">    </span><span class="mi">613</span> <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">615</span>     <span class="n">est</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xi</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">yi</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;next_xs_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">acq_func</span> <span class="o">==</span> <span class="s2">&quot;gp_hedge&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">618</span>     <span class="bp">self</span><span class="o">.</span><span class="n">gains_</span> <span class="o">-=</span> <span class="n">est</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_xs_</span><span class="p">))</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/skopt/learning/gaussian_process/gpr.py:203,</span> in <span class="ni">GaussianProcessRegressor.fit</span><span class="nt">(self, X, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span>         <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span>             <span class="n">noise_level</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">noise</span><span class="p">,</span> <span class="n">noise_level_bounds</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span>         <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">203</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="c1"># The noise component of this kernel should be set to zero</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="c1"># while estimating K(X_test, X_test)</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="c1"># http://www.gaussianprocess.org/gpml/chapters/RW2.pdf</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># Hence this hack</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/base.py:1351,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1344</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1346</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1347</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span> <span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:325,</span> in <span class="ni">GaussianProcessRegressor.fit</span><span class="nt">(self, X, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>     <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_restarts_optimizer</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>         <span class="n">theta_initial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">bounds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>         <span class="n">optima</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">325</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_constrained_optimization</span><span class="p">(</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">theta_initial</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="c1"># Select result from run with minimal (negative) log-marginal</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="c1"># likelihood</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span> <span class="n">lml_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">optima</span><span class="p">))</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:656,</span> in <span class="ni">GaussianProcessRegressor._constrained_optimization</span><span class="nt">(self, obj_func, initial_theta, bounds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">654</span> <span class="k">def</span> <span class="nf">_constrained_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_func</span><span class="p">,</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">==</span> <span class="s2">&quot;fmin_l_bfgs_b&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">656</span>         <span class="n">opt_res</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>             <span class="n">obj_func</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">658</span>             <span class="n">initial_theta</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span>             <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>             <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">661</span>             <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">662</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">663</span>         <span class="n">_check_optimize_result</span><span class="p">(</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span> <span class="n">opt_res</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">664</span>         <span class="n">theta_opt</span><span class="p">,</span> <span class="n">func_min</span> <span class="o">=</span> <span class="n">opt_res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">opt_res</span><span class="o">.</span><span class="n">fun</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_minimize.py:713,</span> in <span class="ni">minimize</span><span class="nt">(fun, x0, args, method, jac, hess, hessp, bounds, constraints, tol, callback, options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">710</span>     <span class="n">res</span> <span class="o">=</span> <span class="n">_minimize_newtoncg</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span> <span class="n">hessp</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">711</span>                              <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">712</span> <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;l-bfgs-b&#39;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">713</span>     <span class="n">res</span> <span class="o">=</span> <span class="n">_minimize_lbfgsb</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">714</span>                            <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">715</span> <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;tnc&#39;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">716</span>     <span class="n">res</span> <span class="o">=</span> <span class="n">_minimize_tnc</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">717</span>                         <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_lbfgsb_py.py:369,</span> in <span class="ni">_minimize_lbfgsb</span><span class="nt">(fun, x0, args, jac, bounds, disp, maxcor, ftol, gtol, eps, maxfun, maxiter, iprint, callback, maxls, finite_diff_rel_step, **unknown_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">363</span> <span class="n">task_str</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="k">if</span> <span class="n">task_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;FG&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">365</span>     <span class="c1"># The minimization routine wants f and g at the current x.</span>
-<span class="g g-Whitespace">    </span><span class="mi">366</span>     <span class="c1"># Note that interruptions due to maxfun are postponed</span>
-<span class="g g-Whitespace">    </span><span class="mi">367</span>     <span class="c1"># until the completion of the current minimization iteration.</span>
-<span class="g g-Whitespace">    </span><span class="mi">368</span>     <span class="c1"># Overwrite f and g:</span>
-<span class="ne">--&gt; </span><span class="mi">369</span>     <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">func_and_grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span> <span class="k">elif</span> <span class="n">task_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;NEW_X&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">371</span>     <span class="c1"># new iteration</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="n">n_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:296,</span> in <span class="ni">ScalarFunction.fun_and_grad</span><span class="nt">(self, x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_update_x_impl</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">296</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_grad</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:262,</span> in <span class="ni">ScalarFunction._update_fun</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="k">def</span> <span class="nf">_update_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">262</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span>         <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:163,</span> in <span class="ni">ScalarFunction.__init__.&lt;locals&gt;.update_fun</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">162</span> <span class="k">def</span> <span class="nf">update_fun</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">163</span>     <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fun_wrapped</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_differentiable_functions.py:145,</span> in <span class="ni">ScalarFunction.__init__.&lt;locals&gt;.fun_wrapped</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span> <span class="bp">self</span><span class="o">.</span><span class="n">nfev</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="c1"># Send a copy because the user may overwrite it.</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="c1"># Overwriting results in undefined behaviour because</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="c1"># fun(self.x) will change self.x, with the two no longer linked.</span>
-<span class="ne">--&gt; </span><span class="mi">145</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="c1"># Make sure the function returns a true scalar</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">fx</span><span class="p">):</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_optimize.py:78,</span> in <span class="ni">MemoizeJac.__call__</span><span class="nt">(self, x, *args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span><span class="w">     </span><span class="sd">&quot;&quot;&quot; returns the function value &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">78</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_compute_if_needed</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/optimize/_optimize.py:72,</span> in <span class="ni">MemoizeJac._compute_if_needed</span><span class="nt">(self, x, *args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">jac</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="n">fg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="bp">self</span><span class="o">.</span><span class="n">jac</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:297,</span> in <span class="ni">GaussianProcessRegressor.fit.&lt;locals&gt;.obj_func</span><span class="nt">(theta, eval_gradient)</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span> <span class="k">def</span> <span class="nf">obj_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="k">if</span> <span class="n">eval_gradient</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">297</span>         <span class="n">lml</span><span class="p">,</span> <span class="n">grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_marginal_likelihood</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>             <span class="n">theta</span><span class="p">,</span> <span class="n">eval_gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">clone_kernel</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="k">return</span> <span class="o">-</span><span class="n">lml</span><span class="p">,</span> <span class="o">-</span><span class="n">grad</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/sklearn/gaussian_process/_gpr.py:627,</span> in <span class="ni">GaussianProcessRegressor.log_marginal_likelihood</span><span class="nt">(self, theta, eval_gradient, clone_kernel)</span>
-<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="n">inner_term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ik,jk-&gt;ijk&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">626</span> <span class="c1"># compute K^-1 of shape (n_samples, n_samples)</span>
-<span class="ne">--&gt; </span><span class="mi">627</span> <span class="n">K_inv</span> <span class="o">=</span> <span class="n">cho_solve</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">628</span>     <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">GPR_CHOLESKY_LOWER</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">check_finite</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">629</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">630</span> <span class="c1"># create a new axis to use broadcasting between inner_term and</span>
-<span class="g g-Whitespace">    </span><span class="mi">631</span> <span class="c1"># K_inv</span>
-<span class="g g-Whitespace">    </span><span class="mi">632</span> <span class="n">inner_term</span> <span class="o">-=</span> <span class="n">K_inv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/scipy/linalg/_decomp_cholesky.py:209,</span> in <span class="ni">cho_solve</span><span class="nt">(c_and_lower, b, overwrite_b, check_finite)</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span> <span class="n">overwrite_b</span> <span class="o">=</span> <span class="n">overwrite_b</span> <span class="ow">or</span> <span class="n">_datacopied</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span> <span class="n">potrs</span><span class="p">,</span> <span class="o">=</span> <span class="n">get_lapack_funcs</span><span class="p">((</span><span class="s1">&#39;potrs&#39;</span><span class="p">,),</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">b1</span><span class="p">))</span>
-<span class="ne">--&gt; </span><span class="mi">209</span> <span class="n">x</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">potrs</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">lower</span><span class="p">,</span> <span class="n">overwrite_b</span><span class="o">=</span><span class="n">overwrite_b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">if</span> <span class="n">info</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;illegal value in </span><span class="si">%d</span><span class="s1">th argument of internal potrs&#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>                      <span class="o">%</span> <span class="o">-</span><span class="n">info</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters for Bayesan Ridge and with 7: OrderedDict([(&#39;model__alpha_1&#39;, 1e-06)])
+Best parameters for Decision Tree and with 7: OrderedDict([(&#39;model__max_depth&#39;, 20), (&#39;model__min_samples_split&#39;, 0.11062015474561707)])
+Best parameters for Random Forest and with 7: OrderedDict([(&#39;model__max_depth&#39;, 8), (&#39;model__n_estimators&#39;, 300)])
+Best parameters for Gradient Boosting and with 7: OrderedDict([(&#39;model__max_depth&#39;, 20), (&#39;model__min_samples_split&#39;, 0.8204021876822672)])
+Best parameters for Knn and with 7: OrderedDict([(&#39;model__n_neighbors&#39;, 6)])
+Best parameters for Ridge and with 7: OrderedDict([(&#39;model__alpha&#39;, 1)])
+Best parameters for Lasso and with 7: OrderedDict([(&#39;model__alpha&#39;, 0.01)])
+Best parameters for Bayesan Ridge and with 14: OrderedDict([(&#39;model__alpha_1&#39;, 0.1)])
+Best parameters for Decision Tree and with 14: OrderedDict([(&#39;model__max_depth&#39;, 20), (&#39;model__min_samples_split&#39;, 0.13215550011886387)])
+Best parameters for Random Forest and with 14: OrderedDict([(&#39;model__max_depth&#39;, 5), (&#39;model__n_estimators&#39;, 300)])
+Best parameters for Gradient Boosting and with 14: OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__min_samples_split&#39;, 0.8360470176973764)])
+Best parameters for Knn and with 14: OrderedDict([(&#39;model__n_neighbors&#39;, 13)])
+Best parameters for Ridge and with 14: OrderedDict([(&#39;model__alpha&#39;, 1)])
+Best parameters for Lasso and with 14: OrderedDict([(&#39;model__alpha&#39;, 0.01)])
+Best parameters for Bayesan Ridge and with 21: OrderedDict([(&#39;model__alpha_1&#39;, 0.1)])
+Best parameters for Decision Tree and with 21: OrderedDict([(&#39;model__max_depth&#39;, 11), (&#39;model__min_samples_split&#39;, 0.3138922057186223)])
+Best parameters for Random Forest and with 21: OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;model__n_estimators&#39;, 200)])
+Best parameters for Gradient Boosting and with 21: OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__min_samples_split&#39;, 0.8360470176973764)])
+Best parameters for Knn and with 21: OrderedDict([(&#39;model__n_neighbors&#39;, 8)])
+Best parameters for Ridge and with 21: OrderedDict([(&#39;model__alpha&#39;, 1)])
+Best parameters for Lasso and with 21: OrderedDict([(&#39;model__alpha&#39;, 0.01)])
+Best parameters for Bayesan Ridge and with 28: OrderedDict([(&#39;model__alpha_1&#39;, 1e-06)])
+Best parameters for Decision Tree and with 28: OrderedDict([(&#39;model__max_depth&#39;, 5), (&#39;model__min_samples_split&#39;, 0.1)])
+Best parameters for Random Forest and with 28: OrderedDict([(&#39;model__max_depth&#39;, 6), (&#39;model__n_estimators&#39;, 200)])
+Best parameters for Gradient Boosting and with 28: OrderedDict([(&#39;model__max_depth&#39;, 12), (&#39;model__min_samples_split&#39;, 0.9330123566255528)])
+Best parameters for Knn and with 28: OrderedDict([(&#39;model__n_neighbors&#39;, 13)])
+Best parameters for Ridge and with 28: OrderedDict([(&#39;model__alpha&#39;, 1)])
+Best parameters for Lasso and with 28: OrderedDict([(&#39;model__alpha&#39;, 0.001)])
 </pre></div>
 </div>
 </div>
@@ -1731,7 +1537,7 @@ Gradient Boosting  0.599120 6.904556e+13 0.369822
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Load data</p>
+        <p class="prev-next-title">Ejercicio 3</p>
       </div>
     </a>
 </div>
