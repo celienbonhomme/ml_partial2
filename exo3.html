@@ -53,18 +53,10 @@
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'exo3';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -184,7 +176,16 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Breast cancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Boston Housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Fraud detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Wind speed</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Load data</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="exo4.html">Ejercicio 4</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -407,68 +408,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">data_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud_final.csv&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/pandas/io/parsers/readers.py:912,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">899</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">900</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">901</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">908</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">909</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">910</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">912</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/pandas/io/parsers/readers.py:577,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">577</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">580</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/pandas/io/parsers/readers.py:1407,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1404</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1407</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/pandas/io/parsers/readers.py:1661,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1660</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1661</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1662</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1663</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1664</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1665</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1666</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1667</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1668</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1669</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1670</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1671</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1672</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~/miniconda3/envs/ml_venv/lib/python3.9/site-packages/pandas/io/common.py:859,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">854</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">859</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/data_fraud_final.csv&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_544660/2029832554.py:1: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
 </pre></div>
 </div>
 </div>
@@ -653,7 +600,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">ADASYN</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="n">data_fraud_sampled</span> <span class="o">=</span> <span class="n">data_fraud</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">data_fraud_sampled</span> <span class="o">=</span> <span class="n">data_fraud</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data_fraud_sampled</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">data_fraud_sampled</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -669,9 +616,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original train dataset shape Counter({0.0: 45581, 1.0: 1662})
-Resampled train dataset shape Counter({0.0: 45581, 1.0: 45358})
-Test dataset shape Counter({0.0: 11364, 1.0: 447})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original train dataset shape Counter({0.0: 455895, 1.0: 16537})
+Resampled train dataset shape Counter({0.0: 455895, 1.0: 455405})
+Test dataset shape Counter({0.0: 113982, 1.0: 4126})
 </pre></div>
 </div>
 </div>
@@ -744,12 +691,11 @@ Test dataset shape Counter({0.0: 11364, 1.0: 447})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Naive Bayes =&gt; 0.1s
-Training Decision Tree =&gt; 5.6s
-Training Random Forest =&gt; 21.3s
-Training Gradient Boosting =&gt; 59.2s
-Training K-NN =&gt; 0.0s
-Training Logistic Regression =&gt; 5.2s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Naive Bayes =&gt; 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6s
+Training Decision Tree =&gt; 
 </pre></div>
 </div>
 </div>
@@ -763,18 +709,18 @@ Training Logistic Regression =&gt; 5.2s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                    Model  Accuracy  Precision  Recall  f1-score   AUC  Training Time (s)
-  Gradient Boosting (res)     0.939      0.332   0.615     0.431 0.783               42.6
-               K-NN (res)     0.903      0.226   0.649     0.336 0.781                0.0
-      Random Forest (res)     0.980      0.851   0.562     0.677 0.779               13.8
-            Decision Tree     0.968      0.579   0.550     0.564 0.767                2.7
-      Decision Tree (res)     0.959      0.464   0.555     0.505 0.765                2.9
-Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738                4.1
-            Random Forest     0.977      0.916   0.438     0.593 0.718                7.4
-        Naive Bayes (res)     0.757      0.085   0.557     0.148 0.661                0.1
-              Naive Bayes     0.764      0.083   0.523     0.144 0.648                0.0
-                     K-NN     0.966      0.632   0.262     0.370 0.628                0.0
-        Gradient Boosting     0.969      0.785   0.237     0.364 0.617               16.6
-      Logistic Regression     0.965      0.712   0.116     0.200 0.557                1.1
+      Random Forest (res)     0.991      0.922   0.814     0.865 0.906             3218.5
+               K-NN (res)     0.945      0.370   0.828     0.512 0.889                0.4
+            Decision Tree     0.983      0.756   0.766     0.761 0.878               62.1
+      Decision Tree (res)     0.979      0.668   0.769     0.715 0.878               68.3
+            Random Forest     0.989      0.966   0.723     0.827 0.861              184.5
+  Gradient Boosting (res)     0.920      0.258   0.690     0.375 0.809              730.4
+                     K-NN     0.977      0.764   0.493     0.599 0.744                0.1
+Logistic Regression (res)     0.783      0.101   0.660     0.176 0.724               44.0
+        Naive Bayes (res)     0.751      0.078   0.565     0.137 0.661                1.1
+              Naive Bayes     0.759      0.079   0.552     0.138 0.659                0.5
+        Gradient Boosting     0.973      0.801   0.285     0.420 0.641              327.3
+      Logistic Regression     0.967      0.617   0.110     0.187 0.554               26.5
 </pre></div>
 </div>
 </div>
@@ -800,23 +746,10 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;K-NN&#39;</span><span class="p">,</span>
         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">MinMaxScaler</span><span class="p">()],</span>
-
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">MinMaxScaler</span><span class="p">()],</span> <span class="c1"># After some tries, we found that the best scaler is MinMaxScaler</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{}</span> <span class="c1"># After some tries, we found that the best model is the one with n_neighbors=1</span>
     <span class="p">},</span>
-    
-    <span class="c1"># {</span>
-    <span class="c1">#     &#39;name_clf&#39; : &#39;Gradient Boosting&#39;,</span>
-    <span class="c1">#     &#39;model&#39;: GradientBoostingClassifier(random_state=42, n_estimators=50),</span>
-    <span class="c1">#     &#39;scalers&#39; : {</span>
-    <span class="c1">#         &#39;scaler&#39;: [None],</span>
-    <span class="c1">#     },</span>
-    <span class="c1">#     &#39;grid&#39; : {</span>
-    <span class="c1">#         &#39;model__max_depth&#39;: [3, 4, 5],</span>
-    <span class="c1">#     },</span>
-
-    <span class="c1"># },</span>
 
     <span class="p">{</span>
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">,</span>
@@ -847,8 +780,7 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-            <span class="c1"># &#39;model__penalty&#39;: [&#39;l1&#39;, &#39;l2&#39;],</span>
-            <span class="s1">&#39;model__penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;model__penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">],</span>
         <span class="p">},</span>
     <span class="p">},</span>
 
@@ -858,7 +790,6 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span>
         <span class="p">},</span>
-        <span class="s1">&#39;classifier__max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__max_depth&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span>
         <span class="p">},</span>
@@ -907,11 +838,11 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
     <span class="n">model</span> <span class="o">=</span> <span class="n">dict_clf</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
 
     <span class="n">steps_gs</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span><span class="c1"># if dict_clf[&#39;scalers&#39;] is not None else &#39;passthrough&#39;,</span>
+        <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="n">steps_bayes</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span><span class="c1"># if dict_clf[&#39;scalers&#39;] is not None else &#39;passthrough&#39;,</span>
+        <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">)),</span>
     <span class="p">]</span>
     <span class="n">pipeline_gs</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps_gs</span><span class="p">)</span>
@@ -923,7 +854,7 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
     <span class="p">}</span>
 
     <span class="n">clf_gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline_gs</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">clf_bayes</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline_bayes</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">clf_bayes</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline_bayes</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
     <span class="n">start_time_gs</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">clf_gs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_res</span><span class="p">,</span> <span class="n">y_train_res</span><span class="p">)</span>
@@ -959,42 +890,42 @@ Logistic Regression (res)     0.787      0.114   0.685     0.196 0.738          
 {&#39;scaler&#39;: MinMaxScaler()}
 Best BayesSearchCV params K-NN (Bayes): 
 OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
-Training time: 34.2s
+Training time: 22930.1s
 
 Training Gradient Boosting
 Best GridSearchCV params Gradient Boosting: 
 {&#39;scaler&#39;: None}
 Best BayesSearchCV params Gradient Boosting (Bayes): 
 OrderedDict([(&#39;scaler&#39;, None)])
-Training time: 329.6s
+Training time: 12746.2s
 
 Training Naive Bayes
 Best GridSearchCV params Naive Bayes: 
 {&#39;model__alpha&#39;: 1e-05, &#39;scaler&#39;: StandardScaler()}
 Best BayesSearchCV params Naive Bayes (Bayes): 
-OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
-Training time: 24.1s
+OrderedDict([(&#39;model__alpha&#39;, 0.001), (&#39;scaler&#39;, StandardScaler())])
+Training time: 91.9s
 
 Training Logistic Regression
 Best GridSearchCV params Logistic Regression: 
-{&#39;model__C&#39;: 0.1, &#39;model__penalty&#39;: &#39;l2&#39;, &#39;scaler&#39;: StandardScaler()}
+{&#39;model__C&#39;: 10, &#39;model__penalty&#39;: &#39;l2&#39;, &#39;scaler&#39;: StandardScaler()}
 Best BayesSearchCV params Logistic Regression (Bayes): 
-OrderedDict([(&#39;model__C&#39;, 1), (&#39;model__penalty&#39;, &#39;l2&#39;), (&#39;scaler&#39;, StandardScaler())])
-Training time: 8.4s
+OrderedDict([(&#39;model__C&#39;, 10), (&#39;model__penalty&#39;, &#39;l2&#39;), (&#39;scaler&#39;, StandardScaler())])
+Training time: 119.9s
 
 Training Decision Tree
 Best GridSearchCV params Decision Tree: 
-{&#39;model__max_depth&#39;: 23, &#39;scaler&#39;: None}
+{&#39;model__max_depth&#39;: 28, &#39;scaler&#39;: None}
 Best BayesSearchCV params Decision Tree (Bayes): 
-OrderedDict([(&#39;model__max_depth&#39;, 58), (&#39;scaler&#39;, None)])
-Training time: 98.2s
+OrderedDict([(&#39;model__max_depth&#39;, 24), (&#39;scaler&#39;, None)])
+Training time: 1816.7s
 
 Training Random Forest
 Best GridSearchCV params Random Forest: 
-{&#39;model__max_depth&#39;: 21, &#39;scaler&#39;: None}
+{&#39;model__max_depth&#39;: 31, &#39;scaler&#39;: None}
 Best BayesSearchCV params Random Forest (Bayes): 
-OrderedDict([(&#39;model__max_depth&#39;, 56), (&#39;scaler&#39;, None)])
-Training time: 129.3s
+OrderedDict([(&#39;model__max_depth&#39;, 31), (&#39;scaler&#39;, None)])
+Training time: 5582.8s
 </pre></div>
 </div>
 </div>
@@ -1008,22 +939,24 @@ Training time: 129.3s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      Model  Accuracy  Precision  Recall  f1-score   AUC  Training Time (s)
-          Gradient Boosting     0.960      0.477   0.617     0.538 0.795              163.7
-  Gradient Boosting (Bayes)     0.960      0.477   0.617     0.538 0.795              165.9
-              Random Forest     0.979      0.816   0.566     0.668 0.780               97.6
-      Random Forest (Bayes)     0.980      0.851   0.562     0.677 0.779               31.7
-        Logistic Regression     0.841      0.152   0.702     0.250 0.774                5.0
-Logistic Regression (Bayes)     0.842      0.152   0.698     0.250 0.773                3.4
-              Decision Tree     0.958      0.459   0.562     0.505 0.768               90.3
-      Decision Tree (Bayes)     0.959      0.464   0.555     0.505 0.765                7.8
-                       K-NN     0.959      0.452   0.389     0.418 0.685               17.0
-               K-NN (Bayes)     0.959      0.452   0.389     0.418 0.685               17.2
-                Naive Bayes     0.758      0.091   0.597     0.157 0.681               23.1
-        Naive Bayes (Bayes)     0.760      0.086   0.559     0.150 0.663                1.1
+              Random Forest     0.991      0.914   0.816     0.862 0.906             1470.9
+      Random Forest (Bayes)     0.991      0.914   0.816     0.862 0.906             4111.9
+      Decision Tree (Bayes)     0.977      0.640   0.783     0.705 0.884              517.1
+              Decision Tree     0.978      0.654   0.774     0.709 0.880             1299.6
+          Gradient Boosting     0.951      0.398   0.762     0.523 0.860             2069.0
+  Gradient Boosting (Bayes)     0.951      0.398   0.762     0.523 0.860            10677.3
+                       K-NN     0.978      0.686   0.679     0.682 0.834             5475.4
+               K-NN (Bayes)     0.978      0.686   0.679     0.682 0.834            17454.8
+        Logistic Regression     0.850      0.141   0.651     0.232 0.754               28.6
+Logistic Regression (Bayes)     0.850      0.141   0.651     0.232 0.754               91.3
+                Naive Bayes     0.757      0.086   0.618     0.151 0.690               63.5
+        Naive Bayes (Bayes)     0.757      0.086   0.618     0.151 0.690               28.4
 </pre></div>
 </div>
 </div>
 </div>
+<p>In general, BayesSearchCV take much more time to find the best parameters. This is because BayesSearchCV makes 10 tries for each model wheather we don’t have more than 10 tries for GridSearchCV. Moreover, a lot of hyperparameters are int so we loose the main interest of BayesOptimization.</p>
+<p>The scores with Bayes and with Gridseearch are almost the same so for the plot we will use the models hyperparametrized with GridSearch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1045,7 +978,7 @@ Logistic Regression (Bayes)     0.842      0.152   0.698     0.250 0.773        
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/37b9205239ded428cc614fe78f7555a3d0d2ba0f0f9c9371c5dd4112e4519cb9.png" src="_images/37b9205239ded428cc614fe78f7555a3d0d2ba0f0f9c9371c5dd4112e4519cb9.png" />
+<img alt="_images/10650ddfc0ae95a611f1c0c2d1f5c6f0c636ee1197e1692182ff0f8f09aa8450.png" src="_images/10650ddfc0ae95a611f1c0c2d1f5c6f0c636ee1197e1692182ff0f8f09aa8450.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1067,10 +1000,11 @@ Logistic Regression (Bayes)     0.842      0.152   0.698     0.250 0.773        
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ba4aedcf404f68c905cffaa9c671cd4c9496e3796236b3d1cd949f5a586825b8.png" src="_images/ba4aedcf404f68c905cffaa9c671cd4c9496e3796236b3d1cd949f5a586825b8.png" />
+<img alt="_images/b176018d512073120ac83b3fdc4ac6192fe191e0366c7328b35267e7d403b918.png" src="_images/b176018d512073120ac83b3fdc4ac6192fe191e0366c7328b35267e7d403b918.png" />
 </div>
 </div>
-<p>The roc curves show that except K-NN and decision tree, the models have a low rate of false positives and a high of true positives.</p>
+<p>With these curves, we can see that random forest has the highest rate of true positive and lowest rate of false positive.</p>
+<p>Finally, <strong>Random</strong> Forest has the best results (highest score for every metric). So we choose this model.</p>
 </section>
 </section>
 
